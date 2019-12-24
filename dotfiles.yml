@@ -1,0 +1,40 @@
+---
+- hosts: all
+
+  vars:
+    HOME: "/Users/{{ lookup('env','USER') }}"
+    SRC: "{{ HOME }}/src"
+    DOTFILES: "{{ SRC }}/dotfiles"
+    DOTFILES_HOMEDIR: "{{ DOTFILES }}/homedir"
+
+  tasks:
+    - name: Clone dotfiles git repository
+      git:
+        repo: https://github.com/patkaehuaea/dotfiles.git
+        # Ansible will create this directory if it
+        # doesn't already exist.
+        dest: "{{ DOTFILES }}"
+
+    - name: Create directories
+      file:
+        path: "{{ HOME }}/{{ item.path }}"
+        state: directory
+        mode: '{{ item.mode }}'
+      with_filetree: "{{ DOTFILES_HOMEDIR }}"
+      when: item.state == 'directory'
+
+    - name: Create symlinks
+      file:
+        src: '{{ item.src }}'
+        dest: '{{ HOME }}/{{ item.path }}'
+        state: link
+        force: yes
+        mode: '{{ item.mode }}'
+      with_filetree: "{{ DOTFILES_HOMEDIR }}"
+      when: item.state == 'file'
+
+      # Requests module used by the iterm2 integration
+      # as sourced by ~/.profile.
+    - pip:
+        name: requests
+        extra_args: --user
