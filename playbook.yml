@@ -5,6 +5,12 @@
     src: "/Users/{{ lookup('env','USER') }}/src"
     ssh: "/Users/{{ lookup('env','USER') }}/.ssh"
   tasks:  
+    - name: Create ~/.azure folder
+      file: path={{ azure }} state=directory
+
+    - name: Create ~/.ssh folder
+      file: path={{ ssh }} state=directory
+
     - name: Create src folder
       file: path={{ src }} state=directory
 
