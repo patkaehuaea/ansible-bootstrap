@@ -16,7 +16,7 @@ ansible-playbook desktop.yml -i hosts --extra-vars 'ansible_become_pass=*****'
 ```
 ## dotfiles
 
-Ansible clones dotfiles from another git repository then creates corresponding
+Ansible clones dotfiles from [patkaehuaea/dotfiles](https://github.com/patkaehuaea/dotfiles) then creates corresponding
 directories, and symlinks in the user's home directory.
 
 ```
