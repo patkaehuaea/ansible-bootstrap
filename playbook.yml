@@ -1,7 +1,8 @@
 ---
 - hosts: all
   vars:
-    azure: "/Users/{{ lookup('env','USER') }}/.azure"
+    HOME: "/Users/{{ lookup('env','USER') }}"
+    azure: "{{ HOME }}/.azure"
     src: "/Users/{{ lookup('env','USER') }}/src"
     ssh: "/Users/{{ lookup('env','USER') }}/.ssh"
   tasks:  
