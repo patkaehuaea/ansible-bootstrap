@@ -20,6 +20,7 @@
         path: "{{ HOME }}/{{ item.path }}"
         state: directory
         mode: '{{ item.mode }}'
+      no_log: True
       with_filetree: "{{ DOTFILES_HOMEDIR }}"
       when: item.state == 'directory'
 
@@ -30,8 +31,12 @@
         state: link
         force: yes
         mode: '{{ item.mode }}'
+      no_log: True
       with_filetree: "{{ DOTFILES_HOMEDIR }}"
       when: item.state == 'file'
+
+    - name: Set bash as default shell
+      shell: chsh -s /bin/bash
 
       # Requests module used by the iterm2 integration
       # as sourced by ~/.profile.
