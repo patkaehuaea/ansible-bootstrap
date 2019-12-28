@@ -24,6 +24,7 @@
     - name: Install applications with homebrew
       homebrew:
         name: [
+               'autojump',
                'awscli',
                'azure-cli',
                'dep',
