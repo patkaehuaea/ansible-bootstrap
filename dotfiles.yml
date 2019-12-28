@@ -4,7 +4,7 @@
   vars:
     HOME: "/Users/{{ lookup('env','USER') }}"
     SRC: "{{ HOME }}/src"
-    DOTFILES: "{{ SRC }}/dotfiles"
+    DOTFILES: "{{ HOME }}/.dotfiles"
     DOTFILES_HOMEDIR: "{{ DOTFILES }}/homedir"
 
   tasks:
@@ -40,3 +40,4 @@
     - pip:
         name: requests
         extra_args: --user
+        executable: /usr/local/bin/pip3
