@@ -67,11 +67,11 @@
     # Instally python module for https://github.com/powerline/powerline.
     - pip:
         name: powerline-status
-        extra_args: --user
+        executable: /usr/local/bin/pip3
 
     - pip:
         name: powerline-gitstatus
-        extra_args: --user
+        executable: /usr/local/bin/pip3
 
     - name: Automatically quit printer app once the print jobs complete
       shell: defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
