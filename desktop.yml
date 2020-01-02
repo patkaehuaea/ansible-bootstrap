@@ -2,110 +2,117 @@
 - hosts: all
 
   vars:
-    AZURE: "{{ HOME }}/.azure"
-    CHEF: "{{ HOME }}/.chef"
-    HOME: "/Users/{{ lookup('env','USER') }}"
+
+    HOME: "{{ lookup('env','USER') }}"
     SRC: "{{ HOME }}/src"
-    SSH: "{{ HOME }}/.ssh"
+    CONFIG_DIRS:
+        - "{{ HOME }}/.aws"
+        - "{{ HOME }}/.azure"
+        - "{{ HOME }}/.chef"
+        - "{{ HOME }}/.ssh"
+    SRC_DIRS:
+        - "{{ SRC }}/ansible"
+        - "{{ SRC }}/chef"
+        - "{{ SRC }}/go"
+        - "{{ SRC }}/terraform"
 
   tasks:
-    - name: Create ~/.azure folder
-      file: path={{ AZURE }} state=directory
 
-    - name: Create ~/.chef folder
-      file: path={{ CHEF }} state=directory
+      - name: Create ~/.config directories
+        file: path={{ item }} state=directory
+        with_items:
+            - "{{ CONFIG_DIRS }}"
 
-    - name: Create src folder
-      file: path={{ SRC }} state=directory
+      - name: Create ~/src directories
+        file: path={{ item }} state=directory
+        with_items:
+            - "{{ SRC_DIRS }}"
 
-    - name: Create ~/.ssh folder
-      file: path={{ SSH }} state=directory
+      - name: Install applications with homebrew
+        homebrew:
+          name: [
+                 'autojump',
+                 'awscli',
+                 'azure-cli',
+                 'dep',
+                 'docker',
+                 'gdb',
+                 'git',
+                 'go',
+                 'nmap',
+                 'packer',
+                 'terraform',
+                 'todo-txt',
+                 'tree',
+                 'vim',
+                 'wget'
+                ]
+          state: present
+          update_homebrew: yes
 
-    - name: Install applications with homebrew
-      homebrew:
-        name: [
-               'autojump',
-               'awscli',
-               'azure-cli',
-               'dep',
-               'docker',
-               'gdb',
-               'git',
-               'go',
-               'nmap',
-               'packer',
-               'terraform',
-               'todo-txt',
-               'tree',
-               'vim',
-               'wget'
-              ]
-        state: present
-        update_homebrew: yes
+      - name: Install fonts with homebrew tap
+        # Need to restart iTerm for 'Hack Nerd Font' to be available.
+        homebrew_tap:
+          name: homebrew/cask-fonts
 
-    - name: Install fonts with homebrew tap
-      # Need to restart iTerm for 'Hack Nerd Font' to be available.
-      homebrew_tap:
-        name: homebrew/cask-fonts
+      - name: Install applications with homebrew cask
+        homebrew_cask:
+          name: [
+                 'chef-workstation',
+                 'font-hack-nerd-font',
+                 'iterm2',
+                 'keepassx',
+                 'slack',
+                 'vagrant',
+                 'vagrant-manager',
+                 'virtualbox'
+                ]
+          state: present
+          # Use --extra-vars="ansible_become_pass=****" so
+          # casks needing a password install.
+          sudo_password: "{{ ansible_become_pass }}"
 
-    - name: Install applications with homebrew cask
-      homebrew_cask:
-        name: [
-               'chef-workstation',
-               'font-hack-nerd-font',
-               'iterm2',
-               'keepassx',
-               'slack',
-               'vagrant',
-               'vagrant-manager',
-               'virtualbox'
-              ]
-        state: present
-        # Use --extra-vars="ansible_become_pass=****" so
-        # casks needing a password install.
-        sudo_password: "{{ ansible_become_pass }}"
+      # Instally python module for https://github.com/powerline/powerline.
+      - pip:
+          name: powerline-status
+          executable: /usr/local/bin/pip3
 
-    # Instally python module for https://github.com/powerline/powerline.
-    - pip:
-        name: powerline-status
-        executable: /usr/local/bin/pip3
+      - pip:
+          name: powerline-gitstatus
+          executable: /usr/local/bin/pip3
 
-    - pip:
-        name: powerline-gitstatus
-        executable: /usr/local/bin/pip3
+      - name: Automatically quit printer app once the print jobs complete
+        shell: defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
-    - name: Automatically quit printer app once the print jobs complete
-      shell: defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+      - name: Disable smart quotes as they’re annoying when typing code
+        shell: defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
-    - name: Disable smart quotes as they’re annoying when typing code
-      shell: defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+      - name: Disable smart dashes as they’re annoying when typing code
+        shell: defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
-    - name: Disable smart dashes as they’re annoying when typing code
-      shell: defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+      - name: Disable the “Are you sure you want to open this application?” dialog
+        shell: defaults write com.apple.LaunchServices LSQuarantine -bool false
 
-    - name: Disable the “Are you sure you want to open this application?” dialog
-      shell: defaults write com.apple.LaunchServices LSQuarantine -bool false
+      - name: Disable the crash reporter
+        shell: defaults write com.apple.CrashReporter DialogType -string "none"
 
-    - name: Disable the crash reporter
-      shell: defaults write com.apple.CrashReporter DialogType -string "none"
+      - name: Show ~/Library
+        shell: chflags nohidden ~/Library
 
-    - name: Show ~/Library
-      shell: chflags nohidden ~/Library
+      - name: Show Drives on the Desktop
+        shell: defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
 
-    - name: Show Drives on the Desktop
-      shell: defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+      - name: Show External Drives on the Desktop
+        shell: defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 
-    - name: Show External Drives on the Desktop
-      shell: defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+      - name: Show Removable Media on the Desktop
+        shell: defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
-    - name: Show Removable Media on the Desktop
-      shell: defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+      - name: Show Mounted Servers on the Desktop
+        shell: defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 
-    - name: Show Mounted Servers on the Desktop
-      shell: defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+      - name: Show Hidden Files
+        shell: defaults write com.apple.finder AppleShowAllFiles -bool true
 
-    - name: Show Hidden Files
-      shell: defaults write com.apple.finder AppleShowAllFiles -bool true
-
-    - name: Kill finder to apply changes
-      shell: killall -HUP Finder
+      - name: Kill finder to apply changes
+        shell: killall -HUP Finder
