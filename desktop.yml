@@ -68,9 +68,6 @@
                  'virtualbox'
                 ]
           state: present
-          # Use --extra-vars="ansible_become_pass=****" so
-          # casks needing a password install.
-          sudo_password: "{{ ansible_become_pass }}"
 
       # Instally python module for https://github.com/powerline/powerline.
       - pip:

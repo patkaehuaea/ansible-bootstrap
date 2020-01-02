@@ -8,11 +8,11 @@ base applications, and configures OSX.
 ## main
 
 The desktop playbook creates base directories and will install most of
-the applications via homebrew. Use the `--extra-vars` argument to provide
-the sudo password to ansible.
+the applications via homebrew. Use the `-K` argument to prompt for the
+BECOME password and allow privileged execution.
 
 ```
-ansible-playbook desktop.yml -i hosts --extra-vars 'ansible_become_pass=*****'
+ansible-playbook -K -i hosts desktop.yml
 ```
 ## dotfiles
 
