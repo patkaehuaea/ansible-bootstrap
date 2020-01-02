@@ -3,7 +3,7 @@
 
   vars:
 
-    HOME: "{{ lookup('env','USER') }}"
+    HOME: "{{ lookup('env','HOME') }}"
     SRC: "{{ HOME }}/src"
     CONFIG_DIRS:
         - "{{ HOME }}/.aws"
