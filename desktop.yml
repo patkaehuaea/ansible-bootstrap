@@ -40,6 +40,7 @@
                  'gdb',
                  'git',
                  'go',
+                 'htop',
                  'nmap',
                  'packer',
                  'terraform',
