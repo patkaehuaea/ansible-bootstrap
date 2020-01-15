@@ -7,20 +7,11 @@ base applications, and configures OSX.
 
 ## main
 
-The desktop playbook creates base directories and will install most of
-the applications via homebrew. Use the `-K` argument to prompt for the
+The main.yml file calls all task files under the `/tasks` directory. Use the `-K` argument to prompt for the
 BECOME password and allow privileged execution.
 
 ```
-ansible-playbook -K -i hosts desktop.yml
-```
-## dotfiles
-
-Ansible clones dotfiles from [patkaehuaea/dotfiles](https://github.com/patkaehuaea/dotfiles) then creates corresponding
-directories, and symlinks in the user's home directory.
-
-```
-$ ansible-playbook dotfiles.yml -i hosts
+ansible-playbook -K -i hosts main.yml
 ```
 
 ## iterm
@@ -34,4 +25,4 @@ settings like remapped keys (options, etc.) and color profiles.
 
 # TODO
 
-1. Update desktop.yml to use any other mechanism than a password on the command line.
+1. Make / verify idempotent homebrew package install.

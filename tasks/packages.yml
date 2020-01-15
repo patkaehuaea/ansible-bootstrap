@@ -1,0 +1,35 @@
+---
+
+  - name: Install applications with homebrew
+    homebrew:
+      name: '{{ item }}'
+      state: present
+      update_homebrew: yes
+    loop: "{{ HOMEBREW_PACKAGES }}"
+
+  - name: Install fonts with homebrew tap
+    # Need to restart iTerm for 'Hack Nerd Font' to be available.
+    homebrew_tap:
+      name: homebrew/cask-fonts
+
+  - name: Install applications with homebrew cask
+    homebrew_cask:
+      name: '{{ item }}'
+      state: present
+    loop: "{{ HOMEBREW_CASK_PACKAGES }}"
+
+  # Instally python module for https://github.com/powerline/powerline.
+  - pip:
+      name: powerline-status
+      executable: /usr/local/bin/pip3
+
+  - pip:
+      name: powerline-gitstatus
+      executable: /usr/local/bin/pip3
+
+    # Requests module used by the iterm2 integration
+    # as sourced by ~/.profile.
+  - pip:
+      name: requests
+      extra_args: --user
+      executable: /usr/local/bin/pip3

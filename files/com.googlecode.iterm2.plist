@@ -867,9 +867,9 @@
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>301 501 1188 456 0 0 1792 1097 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>290 491 665 451 0 0 1792 1097 </string>
+	<string>199 205 1442 892 0 0 1792 1097 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>784 341 882 756 0 0 1792 1097 </string>
+	<string>784 630 665 451 0 0 1792 1097 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>87 630 650 467 0 0 1792 1097 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -1517,6 +1517,8 @@
 				<key>Red Component</key>
 				<real>0.87367779016494751</real>
 			</dict>
+			<key>Minimum Contrast</key>
+			<real>0.12195933948863637</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
@@ -1571,6 +1573,8 @@
 			<string></string>
 			<key>Silence Bell</key>
 			<false/>
+			<key>Smart Cursor Color</key>
+			<false/>
 			<key>Sync Title</key>
 			<false/>
 			<key>Tab Color</key>
@@ -1598,6 +1602,8 @@
 			<true/>
 			<key>Use Bright Bold</key>
 			<true/>
+			<key>Use Cursor Guide</key>
+			<false/>
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
@@ -1632,7 +1638,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>F2F032B6-BF14-4308-81EA-EACB5727A557</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>87</integer>
+	<integer>88</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -2430,7 +2436,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-01-01T22:33:12Z</date>
+	<date>2020-01-05T19:42:16Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowPaneTitles</key>
@@ -2447,5 +2453,9 @@
 	<integer>0</integer>
 	<key>iTerm Version</key>
 	<string>3.3.7</string>
+	<key>kCPKSelectionViewPreferredModeKey</key>
+	<integer>0</integer>
+	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
+	<false/>
 </dict>
 </plist>
