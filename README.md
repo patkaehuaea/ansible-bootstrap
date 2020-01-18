@@ -28,3 +28,4 @@ settings like remapped keys (options, etc.) and color profiles.
 1. Make / verify idempotent homebrew package install.
 2. Add homebrew install.
 3. Add XCode CLI install `xcode-select --install`.
+4. Add ansible install.
