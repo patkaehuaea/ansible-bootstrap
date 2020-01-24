@@ -35,6 +35,7 @@
     - 'font-hack-nerd-font'
     - 'iterm2'
     - 'keepassx'
+    - 'install macdown'
     - 'slack'
     - 'vagrant'
     - 'vagrant-manager'
