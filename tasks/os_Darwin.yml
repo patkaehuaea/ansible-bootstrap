@@ -1,5 +1,29 @@
 ---
 
+  - name: Install applications with homebrew
+    homebrew:
+      name: '{{ item }}'
+      state: present
+      update_homebrew: yes
+    loop: "{{ brew }}"
+
+  - name: Install fonts with homebrew tap
+    # Need to restart iTerm for 'Hack Nerd Font' to be available.
+    homebrew_tap:
+      name: homebrew/cask-fonts
+
+  - name: Install applications with homebrew cask
+    homebrew_cask:
+      name: '{{ item }}'
+      state: present
+    loop: "{{ cask }}"
+
+     # Requests module used by the iterm2 integration
+     # as sourced by ~/.profile.
+   - pip:
+       name: requests
+       extra_args: --user
+
   - name: Automatically quit printer app once the print jobs complete
     shell: defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 

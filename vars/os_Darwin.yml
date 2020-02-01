@@ -1,0 +1,32 @@
+---
+
+  brew:
+    - 'autojump'
+    - 'awscli'
+    - 'azure-cli'
+    - 'dep'
+    - 'docker'
+    - 'gdb'
+    - 'git'
+    - 'go'
+    - 'htop'
+    - 'nmap'
+    - 'packer'
+    - 'terraform'
+    - 'todo-txt'
+    - 'tree'
+    - 'vim'
+    - 'wget'
+    - 'python3-pip'
+    - 'curl'
+
+  cask:
+    - 'chef-workstation'
+    - 'font-hack-nerd-font'
+    - 'iterm2'
+    - 'keepassx'
+    - 'install macdown'
+    - 'slack'
+    - 'vagrant'
+    - 'vagrant-manager'
+    - 'virtualbox'

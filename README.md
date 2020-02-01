@@ -14,6 +14,20 @@ BECOME password and allow privileged execution.
 ansible-playbook -K -i hosts main.yml
 ```
 
+## vim
+
+Install vim plugins using Vundle from the command line.
+
+```
+vim +PluginInstall +qall
+```
+
+Alternatively, install from within vim.
+
+```
+:PluginInstall
+```
+
 ## iterm
 
 Ansible installs iTerm but we need to load preferences. This is how we retain

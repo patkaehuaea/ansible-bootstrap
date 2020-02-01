@@ -1,16 +1,73 @@
 ---
+
 - hosts: all
+
+  vars:
+
+    home: "{{ lookup('env','HOME') }}"
+
+    directories:
+      - "{{ home }}/.aws"
+      - "{{ home }}/.azure"
+      - "{{ home }}/.chef"
+      - "{{ home }}/.ssh"
+      - "{{ home }}/src"
+      - "{{ home }}/src/ansible"
+      - "{{ home }}/src/chef"
+      - "{{ home }}/src/go"
+      - "{{ home }}/src/powershell"
+      - "{{ home }}/src/terraform"
+
+    dotfiles: "{{ home }}/.dotfiles"
+
+    dotfiles_homedir: "{{ dotfiles }}/homedir"
 
   tasks:
 
-      - name: Include all .json and .jsn files in group_vars and all nested directories (2.3)
-        include_vars:
-          dir: group_vars
 
-      - include_tasks: tasks/directories.yml
+      - name: Set OS distribution dependent variables
+        include_vars: os_{{ ansible_facts['os_family'] }}.yml
 
-      - include_tasks: tasks/packages.yml
+      - name: Create configuration and source directories
+        file: path={{ item }} state=directory
+        with_items:
+          - "{{ directories }}"
 
-      - include_tasks: tasks/dotfiles.yml
+      - include_tasks: tasks/os_{{ ansible_facts['os_family'] }}.yml
+        when: ansible_os_family == 'Debian'
 
-      - include_tasks: tasks/osx.yml
+      - pip:
+          executable: pip3
+          name: powerline-status
+
+      - pip:
+          executable: pip3
+          name: powerline-gitstatus
+
+      - name: Install vim plugins with Vundle
+        shell: vim +PluginInstall +qall > /dev/null
+
+      - name: Clone dotfiles git repository
+        git:
+          repo: https://github.com/patkaehuaea/dotfiles.git
+          # Ansible will create this directory if it
+          # doesn't already exist.
+          dest: "{{ dotfiles }}"
+
+      - name: Create directories
+        file:
+          path: "{{ home }}/{{ item.path }}"
+          state: directory
+          mode: '{{ item.mode }}'
+        with_filetree: "{{ dotfiles_homedir }}"
+        when: item.state == 'directory'
+
+      - name: Create symlinks
+        file:
+          src: '{{ item.src }}'
+          dest: '{{ home }}/{{ item.path }}'
+          state: link
+          force: yes
+          mode: '{{ item.mode }}'
+        with_filetree: "{{ dotfiles_homedir }}"
+        when: item.state == 'file'

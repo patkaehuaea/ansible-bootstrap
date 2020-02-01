@@ -1,0 +1,16 @@
+---
+
+apt:
+  - 'autojump'
+  - 'awscli'
+  - 'curl'
+  - 'docker'
+  - 'git'
+  - 'htop'
+  - 'nmap'
+  - 'packer'
+  - 'python3-pip'
+  - 'tree'
+  - 'vim'
+  - 'wget'
+  - 'zsh'
