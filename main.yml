@@ -71,3 +71,17 @@
           mode: '{{ item.mode }}'
         with_filetree: "{{ dotfiles_homedir }}"
         when: item.state == 'file'
+
+      - name: Clone oh-my-zsh git repository
+        git:
+          repo: https://github.com/ohmyzsh/ohmyzsh.git
+          # Ansible will create this directory if it
+          # doesn't already exist.
+          dest: "{{ home }}/.oh-my-zsh"
+
+      - name: Clone Powerlevel9k git repository
+        git:
+          repo: https://github.com/bhilburn/powerlevel9k.git
+          # Ansible will create this directory if it
+          # doesn't already exist.
+          dest: "{{ home }}/.oh-my-zsh/custom/themes/powerlevel9k"
