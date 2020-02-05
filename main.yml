@@ -34,15 +34,16 @@
           - "{{ directories }}"
 
       - include_tasks: tasks/os_{{ ansible_facts['os_family'] }}.yml
-        when: ansible_os_family == 'Debian'
 
       - pip:
           executable: pip3
           name: powerline-status
+        become: yes
 
       - pip:
           executable: pip3
           name: powerline-gitstatus
+        become: yes
 
       - name: Install vim plugins with Vundle
         shell: vim +PluginInstall +qall > /dev/null
