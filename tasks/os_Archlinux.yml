@@ -1,0 +1,19 @@
+---
+        - name: Run the equivalent of "pacman -Sy" before installs
+          pacman:
+            update_cache: yes
+          become: yes
+
+        - name: Install applications with pacman
+          pacman:
+            name: '{{ item }}'
+            state: present
+          loop: "{{ pacman }}"
+          become: yes
+
+
+        - name: Make sure a service is running
+          systemd:
+            enabled: yes
+            state: started
+            name: bluetooth.service
