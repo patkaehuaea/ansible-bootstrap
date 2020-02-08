@@ -12,11 +12,6 @@
       - "{{ home }}/.chef"
       - "{{ home }}/.ssh"
       - "{{ home }}/src"
-      - "{{ home }}/src/ansible"
-      - "{{ home }}/src/chef"
-      - "{{ home }}/src/go"
-      - "{{ home }}/src/powershell"
-      - "{{ home }}/src/terraform"
 
     dotfiles: "{{ home }}/.dotfiles"
 
