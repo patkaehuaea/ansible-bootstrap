@@ -11,9 +11,22 @@
           loop: "{{ pacman }}"
           become: yes
 
-
         - name: Make sure a service is running
           systemd:
             enabled: yes
             state: started
             name: bluetooth.service
+
+        - name: Clone yay repository
+          git:
+            repo: https://aur.archlinux.org/yay.git
+            dest: ~/src/yay
+
+        - name: Build yay with makepkg
+          shell:
+            cmd: makepkg -si
+            chdir: ~/src/yay
+            # Will not run if /usr/bin/yay exists.
+            creates: /usr/bin/yay
+
+
