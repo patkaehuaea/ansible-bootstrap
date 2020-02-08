@@ -16,6 +16,7 @@ pacman:
   - 'nmap'
   - 'packer'
   - 'papirus-icon-theme'
+  - 'powerline-fonts'
   - 'python-pip'
   - 'spectacle'
   - 'tree'
