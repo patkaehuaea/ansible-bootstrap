@@ -9,9 +9,11 @@ pacman:
   - 'git'
   - 'gwenview'
   - 'htop'
+  - 'kde-cli-tools' # Installs kwriteconfig5 and kreadconfig5 for updating KDE configs e.g. ~/.config/kwinrulesrc
   - 'kvantum-qt5' # Kvantum engine and theme manager for additional theme customizations.
   - 'plasma5-applets-active-window-control' # Enable window decorations panel in system settings.
   - 'latte-dock'
+  - 'man'
   - 'nmap'
   - 'packer'
   - 'papirus-icon-theme'
