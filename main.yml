@@ -19,7 +19,6 @@
 
   tasks:
 
-
       - name: Set OS distribution dependent variables
         include_vars: os_{{ ansible_facts['os_family'] }}.yml
 
@@ -43,42 +42,6 @@
       - name: Install vim plugins with Vundle
         shell: vim +PluginInstall +qall > /dev/null
 
-      - name: Clone dotfiles git repository
-        git:
-          repo: https://github.com/patkaehuaea/dotfiles.git
-          # Ansible will create this directory if it
-          # doesn't already exist.
-          dest: "{{ dotfiles }}"
-
-      - name: Create directories
-        file:
-          path: "{{ home }}/{{ item.path }}"
-          state: directory
-          mode: '{{ item.mode }}'
-        with_filetree: "{{ dotfiles_homedir }}"
-        when: item.state == 'directory'
-
-      - name: Create symlinks
-        file:
-          src: '{{ item.src }}'
-          dest: '{{ home }}/{{ item.path }}'
-          state: link
-          force: yes
-          mode: '{{ item.mode }}'
-        with_filetree: "{{ dotfiles_homedir }}"
-        when: item.state == 'file'
-
-      - name: Clone oh-my-zsh git repository
-        git:
-          repo: https://github.com/ohmyzsh/ohmyzsh.git
-          dest: "{{ home }}/.oh-my-zsh"
-
-      - name: Clone Powerlevel9k oh-my-zsh theme
-        git:
-          repo: https://github.com/bhilburn/powerlevel9k.git
-          dest: "{{ home }}/.oh-my-zsh/custom/themes/powerlevel9k"
-
-      - name: Clone spaceship-prompt oh-my-zsh theme
-        git:
-          repo: https://github.com/denysdovhan/spaceship-prompt.git
-          dest: "{{ home }}/.oh-my-zsh/custom/themes/spaceship-prompt"
+  roles:
+    - role: patkaehuaea.ansible_role_zsh
+      become: yes
