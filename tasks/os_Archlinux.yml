@@ -11,11 +11,23 @@
           loop: "{{ pacman }}"
           become: yes
 
-        - name: Make sure a service is running
+        - name: Make sure bluetooth is enabled and running
           systemd:
             enabled: yes
             state: started
             name: bluetooth.service
+
+        - name: Make sure docker daemon is enabled and running
+          systemd:
+            enabled: yes
+            state: started
+            name: docker.service
+
+        - name: adding existing user 'pat' to group docker
+          user:
+            name: 'pat'
+            groups: docker
+            append: yes
 
         - name: Clone yay repository
           git:
