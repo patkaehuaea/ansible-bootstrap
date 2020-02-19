@@ -13,10 +13,6 @@
       - "{{ home }}/.ssh"
       - "{{ home }}/src"
 
-    dotfiles: "{{ home }}/.dotfiles"
-
-    dotfiles_homedir: "{{ dotfiles }}/homedir"
-
   tasks:
 
       - name: Set OS distribution dependent variables
