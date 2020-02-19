@@ -36,7 +36,9 @@
         become: yes
 
       - name: Install vim plugins with Vundle
-        shell: vim +PluginInstall +qall > /dev/null
+        # Must use the "--not-a-term" flag or vim will print
+        # "warning: Output is not to a terminal".
+        shell: vim +PluginInstall +qall --not-a-term > /dev/null
 
   roles:
     - role: patkaehuaea.ansible_role_zsh
