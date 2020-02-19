@@ -32,4 +32,3 @@ pacman:
   - 'vim'
   - 'virtualbox' # Use virtualbox-host-modules-arch.
   - 'wget'
-  - 'zsh'
