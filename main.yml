@@ -15,31 +15,27 @@
 
   tasks:
 
-    #      - name: Set OS distribution dependent variables
-    #        include_vars: os_{{ ansible_facts['os_family'] }}.yml
-    #
-    #      - name: Create configuration and source directories
-    #        file: path={{ item }} state=directory
-    #        with_items:
-    #          - "{{ directories }}"
-    #
-    #      - include_tasks: tasks/os_{{ ansible_facts['os_family'] }}.yml
-    #
-    #      - pip:
-    #          executable: pip3
-    #          name: powerline-status
-    #        become: yes
-    #
-    #      - pip:
-    #          executable: pip3
-    #          name: powerline-gitstatus
-    #        become: yes
+      - name: Set OS distribution dependent variables
+        include_vars: os_{{ ansible_facts['os_family'] }}.yml
 
+      - name: Create configuration and source directories
+        file: path={{ item }} state=directory
+        with_items:
+          - "{{ directories }}"
+
+      - include_tasks: tasks/os_{{ ansible_facts['os_family'] }}.yml
+
+      - pip:
+          executable: pip3
+          name: powerline-status
+        become: yes
+
+      - pip:
+          executable: pip3
+          name: powerline-gitstatus
+        become: yes
 
   roles:
 
-    - role: patkaehuaea.ansible_role_vim
-      become: yes
-
-    - role: patkaehuaea.ansible_role_zsh
+    - role: patkaehuaea.ansible_role_dotfiles
       become: yes
