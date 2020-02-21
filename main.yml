@@ -35,6 +35,13 @@
           name: powerline-gitstatus
         become: yes
 
+      - name: Download and unarchive go binaries
+        unarchive:
+          src: '{{ go_src }}'
+          dest: /usr/local/
+          remote_src: yes
+        become: yes
+
   roles:
 
     - role: patkaehuaea.ansible_role_dotfiles

@@ -1,5 +1,7 @@
 ---
 
+go_src: 'https://dl.google.com/go/go1.13.8.linux-amd64.tar.gz'
+
 pacman:
   - 'aws-cli'
   - 'bc' # Arbitrary precision calculator language required by bonsai.sh.
@@ -10,7 +12,6 @@ pacman:
   - 'device-mapper' # Docker dependency
   - 'docker'
   - 'git'
-  - 'go'
   - 'gwenview'
   - 'htop'
   - 'kde-cli-tools' # Installs kwriteconfig5 and kreadconfig5 for updating KDE configs e.g. ~/.config/kwinrulesrc
