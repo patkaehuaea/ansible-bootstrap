@@ -18,11 +18,11 @@
       state: present
     loop: "{{ cask }}"
 
-     # Requests module used by the iterm2 integration
-     # as sourced by ~/.profile.
-   - pip:
-       name: requests
-       extra_args: --user
+    # Requests module used by the iterm2 integration
+    # as sourced by ~/.profile.
+  - pip:
+      name: requests
+      extra_args: --user
 
   - name: Automatically quit printer app once the print jobs complete
     shell: defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
