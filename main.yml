@@ -35,11 +35,14 @@
           name: powerline-gitstatus
         become: yes
 
-      - name: Install vim plugins with Vundle
-        # Must use the "--not-a-term" flag or vim will print
-        # "warning: Output is not to a terminal".
-        shell: vim +PluginInstall +qall --not-a-term > /dev/null
+      - name: Download and unarchive go binaries
+        unarchive:
+          src: '{{ go_src }}'
+          dest: /usr/local/
+          remote_src: yes
+        become: yes
 
   roles:
-    - role: patkaehuaea.ansible_role_zsh
+
+    - role: patkaehuaea.ansible_role_dotfiles
       become: yes

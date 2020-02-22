@@ -14,3 +14,5 @@ apt:
   - 'vim'
   - 'wget'
   - 'zsh'
+
+go_src: 'https://dl.google.com/go/go1.13.8.linux-amd64.tar.gz'
