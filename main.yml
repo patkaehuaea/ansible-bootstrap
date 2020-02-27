@@ -41,8 +41,12 @@
           dest: /usr/local/
           remote_src: yes
         become: yes
+        # TODO: Remove when you find a clean way to differentiate
+        # between binary install types.
+        when: ansible_facts['os_family'] != "Darwin"
+
 
   roles:
 
-    - role: patkaehuaea.ansible_role_dotfiles
+    - role:  patkaehuaea.ansible_role_dotfiles
       become: yes
