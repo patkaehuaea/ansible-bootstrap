@@ -17,6 +17,12 @@
             state: started
             name: bluetooth.service
 
+        - name: Enable and start NetworkManager
+          systemd:
+            enabled: yes
+            state: started
+            name: NetworkManager
+
         - name: Make sure docker daemon is enabled and running
           systemd:
             enabled: yes
@@ -40,5 +46,17 @@
             chdir: ~/src/yay
             # Will not run if /usr/bin/yay exists.
             creates: /usr/bin/yay
+ 
+          # Requires https://github.com/kewlfft/ansible-aur
+        - name: Install nordvpn with ansible-aur-git
+          aur:
+            name: nordvpn-bin
+            use: yay
 
+        - name: Start and enable nordvpn service
+          systemd:
+            enabled: yes
+            state: started
+            name: nordvpnd.service
+          become: yes
 

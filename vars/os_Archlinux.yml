@@ -11,6 +11,7 @@ pacman:
   - 'curl'
   - 'device-mapper' # Docker dependency
   - 'docker'
+  - 'firefox'
   - 'git'
   - 'gwenview'
   - 'htop'
@@ -19,8 +20,10 @@ pacman:
   - 'kvantum-qt5' # Kvantum engine and theme manager for additional theme customizations.
   - 'plasma5-applets-active-window-control' # Enable window decorations panel in system settings.
   - 'latte-dock'
+  - 'lsof'
   - 'man'
   - 'nmap'
+  - 'openssh'
   - 'packer'
   - 'papirus-icon-theme'
   - 'powerline-fonts'

@@ -48,5 +48,5 @@
 
   roles:
 
-    - role:  patkaehuaea.ansible_role_dotfiles
-      become: yes
+      - role:  patkaehuaea.ansible_role_dotfiles
+        become: yes
