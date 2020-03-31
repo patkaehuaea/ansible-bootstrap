@@ -35,6 +35,12 @@
           name: powerline-gitstatus
         become: yes
 
+      - name: Installs nvbn/thfuck.
+        pip:
+          executable: pip3
+          name: thefuck
+        become: yes
+
       - name: Download and unarchive go binaries
         unarchive:
           src: '{{ go_src }}'
