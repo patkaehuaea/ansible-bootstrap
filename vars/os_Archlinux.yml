@@ -15,13 +15,15 @@ pacman:
   - 'docker'
   - 'firefox'
   - 'git'
+  - 'gtop' # Sweet implementation of htop in go. Did I saw sweet?
   - 'gwenview'
   - 'htop'
-  - 'kde-cli-tools' # Installs kwriteconfig5 and kreadconfig5 for updating KDE configs e.g. ~/.config/kwinrulesrc
-  - 'ktorrent' # Download and manage bittorrents.
-  - 'kvantum-qt5' # Kvantum engine and theme manager for additional theme customizations.
-  - 'plasma5-applets-active-window-control' # Enable window decorations panel in system settings.
-  - 'latte-dock'
+  #   - 'kde-cli-tools' # Installs kwriteconfig5 and kreadconfig5 for updating KDE configs e.g. ~/.config/kwinrulesrc
+  - 'kitty' # Cross platform terminal editor
+  #   - 'ktorrent' # Download and manage bittorrents.
+  #   - 'kvantum-qt5' # Kvantum engine and theme manager for additional theme customizations.
+  #   - 'plasma5-applets-active-window-control' # Enable window decorations panel in system settings.
+  #  - 'latte-dock'
   - 'libappindicator-gtk3' # Resolves 'ValueError: Namespace AppIndicator3 not available after installing blueman.
   - 'lm_sensors hddtemp' # Find hdd temperatures at login.
   - 'lsof'
@@ -38,8 +40,9 @@ pacman:
   - 'pulseeffects' # PulseEffects is a GTK advanced utility for applying audio effects to applications output or to microphone before sending its audio stream to a recording tool. 
   - 'python-pip'
   - 'ranger' # A VIM-inspired filemanager for the console https://ranger.github.io/
-  - 'sddm'
-  - 'sddm-kcm'
+  - 'redshift' # Redshift adjusts the color temperature of your screen according to your surroundings. This may help your eyes hurt less if you are working in front of the screen at night.
+    #  - 'sddm'
+    #  - 'sddm-kcm'
   - 'spectacle'
   - 'steam' # Play games with Steam for Linux.
   - 'terminus-font-otb' # Play games with Steam for Linux.
