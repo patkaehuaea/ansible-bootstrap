@@ -1,0 +1,5 @@
+---
+
+dotfiles_repo: "https://github.com/patkaehuaea/dotfiles.git"
+dotfiles_dest: "{{ user_home }}/src/dotfiles"
+dotfiles_user_home: "{{ lookup('env','HOME') }}"

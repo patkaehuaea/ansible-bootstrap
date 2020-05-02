@@ -1,0 +1,6 @@
+---
+
+zsh_ohmyzsh: "{{ lookup('env','HOME') }}/.oh-my-zsh"
+zsh_config: "{{ lookup('env','HOME') }}/.zshrc"
+zsh_custom: "{{ zsh_ohmyzsh }}/custom"
+zsh_theme: "spaceship"

@@ -9,17 +9,19 @@ pacman:
   - 'blueman' # Blueman is a full featured Bluetooth manager written in GTK. Used to enable bluetooth widget in AwesomeWM.
   - 'bluez'
   - 'bluez-utils'
+  - 'cmatrix' # Why wouldn't I want matrix in a terminal? :)
   - 'containerd' # Docker dependency
   - 'curl'
   - 'device-mapper' # Docker dependency
+  - 'dnsutils' #Includes utilities like 'dig' and 'host'
   - 'docker'
   - 'firefox'
   - 'git'
+  - 'gtk-engine-murrine' # Murrine GTK+ Cairo Engine 
   - 'gtop' # Sweet implementation of htop in go. Did I saw sweet?
   - 'gwenview'
   - 'htop'
   #   - 'kde-cli-tools' # Installs kwriteconfig5 and kreadconfig5 for updating KDE configs e.g. ~/.config/kwinrulesrc
-  - 'kitty' # Cross platform terminal editor
   #   - 'ktorrent' # Download and manage bittorrents.
   #   - 'kvantum-qt5' # Kvantum engine and theme manager for additional theme customizations.
   #   - 'plasma5-applets-active-window-control' # Enable window decorations panel in system settings.
@@ -28,7 +30,9 @@ pacman:
   - 'lm_sensors hddtemp' # Find hdd temperatures at login.
   - 'lsof'
   - 'man'
+  - 'maim' # Utility used by binary in AwesomeWM to take screenshots.
   - 'nmap'
+  - 'openhab2' # Home automation framework.
   - 'openssh'
   - 'otf-font-awesome' # OTF (OpenType) font package for font-awesome. Used initially for Awesome WM theme here: https://github.com/lcpz/awesome-copycats/tree/master/themes/vertex.
   - 'packer'
@@ -41,8 +45,8 @@ pacman:
   - 'python-pip'
   - 'ranger' # A VIM-inspired filemanager for the console https://ranger.github.io/
   - 'redshift' # Redshift adjusts the color temperature of your screen according to your surroundings. This may help your eyes hurt less if you are working in front of the screen at night.
-    #  - 'sddm'
-    #  - 'sddm-kcm'
+  - 'samba' # Good 'ol SMB ; used to transfer backups from homeassistant
+  - 'signal-desktop' # Secure, cross-platform messaging app
   - 'spectacle'
   - 'steam' # Play games with Steam for Linux.
   - 'terminus-font-otb' # Play games with Steam for Linux.
@@ -52,6 +56,10 @@ pacman:
   - 'ttf-hack' # TTF (TrueType) font package for hack font. Needed to display certain unicode characters in vim.
   - 'vim'
   - 'virtualbox' # Use virtualbox-host-modules-arch.
+  - 'xclip' # Command line interface to the X11 clipboard. Used to help capture screenshots via snap, maim, and AwesomeWM.
+  - 'xfce4-pulseaudio-plugin' # Panel applet which has support for keyboard volume control and notifications.
   - 'xorg-xdpyinfo' # Verify that the X Server has properly detected the physical dimensions of your monitor e.g. xdpyinfo | grep -B 2 resolution
   - 'wavemon' # Terminal based wifi utility.
+  - 'wmctrl' # Utility to kill plasma at i3 startup
   - 'wget'
+  - 'zsh' # Best shell ever.

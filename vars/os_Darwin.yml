@@ -9,6 +9,7 @@
     - 'gdb'
     - 'git'
     - 'go'
+    - 'gnupg'
     - 'htop'
     - 'nmap'
     - 'packer'
