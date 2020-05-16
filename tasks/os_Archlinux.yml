@@ -29,10 +29,12 @@
             state: started
             name: docker.service
 
-        - name: adding existing user 'pat' to group docker
+        # Need in order to use docker and mount USB
+        # devices in VirtualBox.
+        - name: adding existing user 'pat' to groups
           user:
             name: 'pat'
-            groups: docker
+            groups: docker,vboxusers
             append: yes
 
         - name: Clone yay repository

@@ -21,6 +21,7 @@ pacman:
   - 'gtop' # Sweet implementation of htop in go. Did I saw sweet?
   - 'gwenview'
   - 'htop'
+  - 'kubectl' # CLI for kubernetes API
   #   - 'kde-cli-tools' # Installs kwriteconfig5 and kreadconfig5 for updating KDE configs e.g. ~/.config/kwinrulesrc
   #   - 'ktorrent' # Download and manage bittorrents.
   #   - 'kvantum-qt5' # Kvantum engine and theme manager for additional theme customizations.
@@ -31,6 +32,7 @@ pacman:
   - 'lsof'
   - 'man'
   - 'maim' # Utility used by binary in AwesomeWM to take screenshots.
+  - 'minikube' # Run a local kubernetes cluster.
   - 'nmap'
   - 'openhab2' # Home automation framework.
   - 'openssh'
@@ -51,6 +53,7 @@ pacman:
   - 'steam' # Play games with Steam for Linux.
   - 'terminus-font-otb' # Play games with Steam for Linux.
   - 'tlp' # Advanced power management for Linux.
+  - 'tmux' # A terminal multiplexer: tmux enables a number of terminals to be created, accessed, and controlled from a single screen.
   - 'tree'
   - 'ttf-font-awesome' # TTF (TrueType) font package for font-awesome.  Used initially for Awesome WM theme here: https://github.com/lcpz/awesome-copycats/tree/master/themes/vertex.
   - 'ttf-hack' # TTF (TrueType) font package for hack font. Needed to display certain unicode characters in vim.
