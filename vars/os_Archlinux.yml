@@ -66,3 +66,4 @@ pacman:
   - 'wmctrl' # Utility to kill plasma at i3 startup
   - 'wget'
   - 'zsh' # Best shell ever.
+  - 'virtualbox-host-modules-arch' # VirtualBox host modules needed for shared clipboard, bridged network, etc.
