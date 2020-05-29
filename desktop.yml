@@ -1,0 +1,72 @@
+---
+
+- hosts: localhost
+
+  tasks:
+
+#    - name: Run the equivalent of "pacman -Sy" before installs
+#      pacman:
+#        update_cache: yes
+#      become: yes
+#
+#   - name: Install applications with pacman
+#     pacman:
+#       name: '{{ item }}'
+#       state: present
+#     loop: "{{ pacman }}"
+#     become: yes
+#
+#    - name: Make sure bluetooth is enabled and running
+#      systemd:
+#        enabled: yes
+#        state: started
+#        name: bluetooth.service
+#
+#    - name: Enable and start NetworkManager
+#      systemd:
+#        enabled: yes
+#        state: started
+#        name: NetworkManager
+#
+#    - name: Make sure docker daemon is enabled and running
+#      systemd:
+#        enabled: yes
+#        state: started
+#        name: docker.service
+#
+#    # Need in order to use docker and mount USB
+#    # devices in VirtualBox.
+#    - name: adding existing user 'pat' to groups
+#      user:
+#        name: 'pat'
+#        groups: docker,vboxusers
+#        append: yes
+#
+#    - name: Clone yay repository
+#      git:
+#        repo: https://aur.archlinux.org/yay.git
+#        dest: ~/src/yay
+#
+#    - name: Build yay with makepkg
+#      shell:
+#        cmd: makepkg -si
+#        chdir: ~/src/yay
+#        # Will not run if /usr/bin/yay exists.
+#        creates: /usr/bin/yay
+#
+#      # Requires https://github.com/kewlfft/ansible-aur
+#    - name: Install nordvpn with ansible-aur-git
+#      aur:
+#        name: nordvpn-bin
+#        use: yay
+#
+#    - name: Start and enable nordvpn service
+#      systemd:
+#        enabled: yes
+#        state: started
+#        name: nordvpnd.service
+#      become: yes
+
+    - include_role:
+        name: common
+        name: awesomewm
