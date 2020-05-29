@@ -1,0 +1,5 @@
+# meta/main.yml
+dependencies:
+# Need the Ansible AUR helper from Ansible galaxy to 
+# install yay packages.
+- kewlfft.aur
