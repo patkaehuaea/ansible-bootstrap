@@ -3,9 +3,17 @@
 Manages the configuration of my desktop via ansible. Creates folders, installs
 base applications, and configures OSX.
 
-# setup
+# usage
 
-## main
+## prerequisites
+
+Install the Ansible AUR helper by running:
+
+```
+ansible-galaxy install kewlfft.aur
+```
+
+# main
 
 The main.yml file calls all task files under the `/tasks` directory. Use the `-K` argument to prompt for the
 BECOME password and allow privileged execution.
