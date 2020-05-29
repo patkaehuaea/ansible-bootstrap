@@ -70,3 +70,4 @@
     - include_role:
         name: common
         name: awesomewm
+        name: i3wm
