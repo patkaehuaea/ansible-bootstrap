@@ -10,6 +10,20 @@
   with_items:
     - "{{ directories }}"
 
+- name: Clone yay repository
+  git:
+    repo: https://aur.archlinux.org/yay.git
+    dest: ~/src/yay
+  when: ansible_facts['os_family'] == "Archlinux"
+
+- name: Build yay with makepkg
+  shell:
+    cmd: makepkg -si
+    chdir: ~/src/yay
+    # Will not run if /usr/bin/yay exists.
+    creates: /usr/bin/yay
+  when: ansible_facts['os_family'] == "Archlinux"
+
 - name: Download and unarchive go binaries
   unarchive:
     src: 'https://dl.google.com/go/go1.13.8.linux-amd64.tar.gz'

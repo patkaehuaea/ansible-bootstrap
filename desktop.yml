@@ -27,7 +27,7 @@
       - 'kvantum-qt5' # Kvantum engine and theme manager for additional theme customizations.
       #  - 'plasma5-applets-active-window-control' # Enable window decorations panel in system settings.
       - 'lm_sensors hddtemp' # Find hdd temperatures at login.
-      - 'libappnndicator-gtk3' # Resolves 'ValueError: Namespace AppIndicator3 not available after installing blueman.
+      - 'libappindicator-gtk3' # Resolves 'ValueError: Namespace AppIndicator3 not available after installing blueman.
       - 'lsof'
       - 'man'
       - 'minikube' # Run a local kubernetes cluster.
@@ -51,12 +51,18 @@
     yay:
       - 'indicator-sound-switcher'
       - 'nordvpn-bin'
-      - 'proton' # Compatibility tool for Steam Play based on Wine and additional components.
+      # TODO: Fix proton install with yay
+      #      - 'proton' # Compatibility tool for Steam Play based on Wine and additional components.
       - 'realvnc-vnc-viewer'
       - 'slack-desktop'
       - 'terminus-font'
 
   tasks:
+
+    - include_role:
+        name: common
+        name: awesomewm
+        name: i3wm
 
     - name: Run the equivalent of "pacman -Sy" before installs
       pacman:
@@ -81,6 +87,10 @@
         enabled: yes
         state: started
         name: NetworkManager
+    - include_role:
+        name: common
+        name: awesomewm
+        name: i3wm
 
     - name: Make sure docker daemon is enabled and running
       systemd:
@@ -96,18 +106,6 @@
         groups: docker,vboxusers
         append: yes
 
-    - name: Clone yay repository
-      git:
-        repo: https://aur.archlinux.org/yay.git
-        dest: ~/src/yay
-
-    - name: Build yay with makepkg
-      shell:
-        cmd: makepkg -si
-        chdir: ~/src/yay
-        # Will not run if /usr/bin/yay exists.
-        creates: /usr/bin/yay
-
     - name: use yay to install applications from the AUR
       aur:
         name: '{{ item }}'
@@ -120,7 +118,3 @@
         name: nordvpnd.service
       become: yes
 
-    - include_role:
-        name: common
-        name: awesomewm
-        name: i3wm
