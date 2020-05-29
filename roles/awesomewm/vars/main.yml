@@ -23,3 +23,9 @@ pacman:
   - 'xorg-xdpyinfo' # Verify that the X Server has properly detected the physical dimensions of your monitor e.g. xdpyinfo | grep -B 2 resolution
 yay:
   - 'awesome-git'
+  - 'rofi-git' # system menu
+  - 'system-san-francisco-font-git' # System font used in OSX.
+  - 'ttf-material-design-icons' # Icon font used for glyphs.
+  - 'ttf-iosevka' # Another font alternative.
+  - 'ttf-nerd-fonts-hack-complete-git' # Collection of fonts used for glyph support.
+  - 'virtualbox-ext-oracle' # Needed for window resize in VirtualBox.
