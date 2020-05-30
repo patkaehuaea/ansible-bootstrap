@@ -19,8 +19,9 @@
       - 'git'
       - 'gtk-engine-murrine' # Murrine GTK+ Cairo Engine 
       - 'gtop' # Sweet implementation of htop in go. Did I saw sweet?
-      - 'gwenview'
-      - 'htop'
+      - 'go' # Core compiler and tools for the Go programming language
+      - 'gwenview' # Gwenview is a fast and easy to use image viewer by KDE, ideal for browsing and displaying a collection of images.
+      - 'htop' # An interactive process viewer for Unix systems.
       - 'kubectl' # CLI for kubernetes API
       - 'kde-cli-tools' # Installs kwriteconfig5 and kreadconfig5 for updating KDE configs e.g. ~/.config/kwinrulesrc
       - 'ktorrent' # Download and manage bittorrents.
@@ -76,6 +77,11 @@
       loop: "{{ pacman }}"
       become: yes
 
+    - name: use yay to install applications from the AUR
+      aur:
+        name: '{{ item }}'
+      loop: '{{ yay }}'
+
     - name: Make sure bluetooth is enabled and running
       systemd:
         enabled: yes
@@ -106,15 +112,9 @@
         groups: docker,vboxusers
         append: yes
 
-    - name: use yay to install applications from the AUR
-      aur:
-        name: '{{ item }}'
-      loop: '{{ yay }}'
-
     - name: Start and enable nordvpn service
       systemd:
         enabled: yes
         state: started
         name: nordvpnd.service
       become: yes
-
