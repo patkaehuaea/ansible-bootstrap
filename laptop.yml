@@ -1,9 +1,39 @@
 ---
 
-
 - hosts: localhost
 
   vars:
+
+    brew:
+      - 'autojump'
+      - 'awscli'
+      - 'azure-cli'
+      - 'dep'
+      - 'docker'
+      - 'gdb'
+      - 'git'
+      - 'go'
+      - 'gnupg'
+      - 'htop'
+      - 'nmap'
+      - 'packer'
+      - 'terraform'
+      - 'todo-txt'
+      - 'tree'
+      - 'vim'
+      - 'wget'
+      - 'curl'
+
+    cask:
+      - 'chef-workstation'
+      - 'font-hack-nerd-font'
+      - 'iterm2'
+      - 'keepassx'
+      - 'macdown'
+      - 'slack'
+      - 'vagrant'
+      - 'vagrant-manager'
+      - 'virtualbox'
 
   tasks:
 
