@@ -21,6 +21,7 @@ pacman:
   - 'ttf-hack' # TTF (TrueType) font package for hack font. Needed to display certain unicode characters in vim.
   - 'wavemon' # Terminal based wifi utility.
   - 'xorg-xdpyinfo' # Verify that the X Server has properly detected the physical dimensions of your monitor e.g. xdpyinfo | grep -B 2 resolution
+
 yay:
   - 'awesome-git'
   - 'rofi-git' # system menu
