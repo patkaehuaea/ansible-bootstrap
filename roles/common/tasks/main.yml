@@ -1,14 +1,14 @@
 ---
 
-- name: Clone dotfiles repository
-  git:
-    repo: "{{ dotfiles_repo }}"
-    dest: "{{ dotfiles_dest }}"
-
 - name: Create configuration and source directories
   file: path={{ item }} state=directory
   with_items:
     - "{{ directories }}"
+
+- name: Clone dotfiles repository
+  git:
+    repo: "{{ dotfiles_repo }}"
+    dest: "{{ dotfiles_dest }}"
 
 - name: Clone yay repository
   git:
@@ -24,14 +24,5 @@
     creates: /usr/bin/yay
   when: ansible_facts['os_family'] == "Archlinux"
 
-- name: Download and unarchive go binaries
-  unarchive:
-    src: 'https://dl.google.com/go/go1.13.8.linux-amd64.tar.gz'
-    dest: /usr/local/
-    remote_src: yes
-  become: yes
-  when: ansible_facts['os_family'] == "Archlinux"
-
-- include_tasks: go.yml
 - include_tasks: vim.yml
 - include_tasks: zsh.yml
