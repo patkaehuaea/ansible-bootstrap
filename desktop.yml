@@ -57,6 +57,7 @@
       - 'realvnc-vnc-viewer'
       - 'slack-desktop'
       - 'terminus-font'
+      - 'todotxt' # Command line todo list.
 
   tasks:
 
