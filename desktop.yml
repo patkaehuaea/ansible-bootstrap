@@ -94,10 +94,6 @@
         enabled: yes
         state: started
         name: NetworkManager
-    - include_role:
-        name: common
-        name: awesomewm
-        name: i3wm
 
     - name: Make sure docker daemon is enabled and running
       systemd:
