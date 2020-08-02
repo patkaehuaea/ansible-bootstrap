@@ -1,0 +1,122 @@
+---
+
+- hosts: localhost
+
+  vars:
+
+    brew:
+      - 'autojump'
+      - 'awscli'
+      - 'azure-cli'
+      - 'dep'
+      - 'docker'
+      - 'gdb'
+      - 'git'
+      - 'go'
+      - 'gnupg'
+      - 'htop'
+      - 'nmap'
+      - 'packer'
+      - 'terraform'
+      - 'todo-txt'
+      - 'toilet'
+      - 'tree'
+      - 'vim'
+      - 'wget'
+      - 'curl'
+
+    cask:
+      - 'alacritty'
+      - 'discord'
+      - 'font-hack-nerd-font'
+      - 'google-chrome'
+      - 'macdown'
+      - 'parallels'
+      - 'slack'
+      - 'xquartz'
+
+    dotfiles_repo: "https://github.com/patkaehuaea/dotfiles"
+    dotfiles_repo_local_destination: "~/src/dotfiles"
+    dotfiles_home: "~"
+    dotfiles_files:
+        - .gitconfig
+        - .gitignore
+        - .shellaliases
+        - .shellfn
+        - .shellpaths
+        - .shellvars
+        - .tmux.conf
+        - .todo.cfg
+        - .vimrc
+        - .zlogin
+        - .zshenv
+        - .zshrc
+
+  tasks:
+
+    - include_role:
+        name: common
+
+    - include_role:
+        name: geerlingguy.dotfiles
+
+    - name: Install applications with homebrew
+      homebrew:
+        name: '{{ item }}'
+        state: present
+        update_homebrew: yes
+      loop: "{{ brew }}"
+
+    - name: Install fonts with homebrew tap
+      # Need to restart iTerm for 'Hack Nerd Font' to be available.
+      homebrew_tap:
+        name: homebrew/cask-fonts
+
+    - name: Install applications with homebrew cask
+      homebrew_cask:
+        name: '{{ item }}'
+        state: present
+      loop: "{{ cask }}"
+
+    - name: Automatically quit printer app once the print jobs complete
+      shell: defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+    - name: Disable smart quotes as they’re annoying when typing code
+      shell: defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+    - name: Disable smart dashes as they’re annoying when typing code
+      shell: defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+    - name: Disable the “Are you sure you want to open this application?” dialog
+      shell: defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+    - name: Disable the crash reporter
+      shell: defaults write com.apple.CrashReporter DialogType -string "none"
+
+    - name: Show ~/Library
+      shell: chflags nohidden ~/Library
+
+    - name: Show Drives on the Desktop
+      shell: defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+
+    - name: Show External Drives on the Desktop
+      shell: defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+
+    - name: Show Removable Media on the Desktop
+      shell: defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+    - name: Show Mounted Servers on the Desktop
+      shell: defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+
+    - name: Don’t automatically rearrange Spaces based on most recent use
+      shell: defaults write com.apple.dock mru-spaces -bool false
+
+    ###############################################################################
+    # configure screen
+    ###############################################################################
+
+    - name: Enable HiDPI display modes (requires restart)
+      shell: defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
+
+    - name: Kill finder to apply changes
+      shell: killall -HUP Finder

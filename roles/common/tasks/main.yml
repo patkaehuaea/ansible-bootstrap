@@ -5,11 +5,6 @@
   with_items:
     - "{{ directories }}"
 
-- name: Clone dotfiles repository
-  git:
-    repo: "{{ dotfiles_repo }}"
-    dest: "{{ dotfiles_dest }}"
-
 - name: Clone yay repository
   git:
     repo: https://aur.archlinux.org/yay.git

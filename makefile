@@ -14,6 +14,7 @@ homebrew: ## Installs homebrew for OSX.
 ansible: ## Installs ansible so we can run bootstrap.
 	@brew update
 	@brew install ansible
+        @ansible-galaxy install geerlingguy.dotfiles 
 
 #ansible: ## Runs main.yml playbook on localhost.
 #	ansible-playbook main.yml

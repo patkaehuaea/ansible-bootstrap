@@ -11,6 +11,7 @@
   git:
     repo: https://github.com/ohmyzsh/ohmyzsh.git
     dest: "{{ zsh_ohmyzsh }}"
+    clone: no
 
 - name: Clone powerlevel9k oh-my-zsh theme
   git:
