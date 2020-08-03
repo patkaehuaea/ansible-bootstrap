@@ -53,6 +53,12 @@
         - .zshrc
 
   tasks:
+    - osx_defaults:
+        domain: com.apple.Safari
+        key: IncludeInternalDebugMenu
+        type: bool
+        value: true
+        state: present
 
     - include_role:
         name: common
@@ -116,7 +122,7 @@
     ###############################################################################
 
     - name: Enable HiDPI display modes (requires restart)
-      shell: defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
+      shell: sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
     - name: Kill finder to apply changes
       shell: killall -HUP Finder
