@@ -30,6 +30,7 @@
       - 'iterm2'
       - 'keepassx'
       - 'macdown'
+      - 'microsoft-teams'
       - 'slack'
       - 'vagrant'
       - 'vagrant-manager'
