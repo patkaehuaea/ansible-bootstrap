@@ -23,12 +23,12 @@
   # ref: https://github.com/junegunn/vim-plug/wiki/tips#install-plugins-on-the-command-line
   ignore_errors: true
 
-- pip:
-    executable: pip3
-    name: powerline-status
-  become: yes
-
-- pip:
-    executable: pip3
-    name: powerline-gitstatus
-  become: yes
+    #- pip:
+    #    executable: pip3
+    #    name: powerline-status
+    #  become: yes
+    #
+    #- pip:
+    #    executable: pip3
+    #    name: powerline-gitstatus
+    #  become: yes
