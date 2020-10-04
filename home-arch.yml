@@ -9,6 +9,7 @@
     user:  "{{ ansible_user_id }}"
 
     pacman:
+      - 'alacritty'
       - 'aws-cli'
       - 'bc' # Arbitrary precision calculator language required by bonsai.sh.
       - 'base-devel' # Needed to compile packages. Will see errors in yay if not installed.
@@ -70,6 +71,10 @@
     dotfiles_repo_local_destination: "~/src/dotfiles"
     dotfiles_home: "~"
     dotfiles_files:
+        - .config/alacritty
+        - .config/picom.conf
+        - .config/polybar
+        - .config/rofi
         - .gitconfig
         - .gitignore
         - .shellaliases
