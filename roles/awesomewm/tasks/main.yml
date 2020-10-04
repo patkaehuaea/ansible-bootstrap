@@ -28,6 +28,6 @@
   file:
     src: '{{ awesomewm_dest }}' 
     dest: '{{ awesomewm_config_dir }}'
-    owner: '{{ awesomewm_user }}'
-    group:  '{{ awesomewm_group }}'
+    owner: '{{ ansible_user_id }}'
+    group:  '{{ ansible_user_gid }}'
     state: link

@@ -4,9 +4,14 @@
 
   vars:
 
+    # Need this variable when modifing user or profile for current user with privileges. If not saved as variable
+    # changes will be made to root.
+    user:  "{{ ansible_user_id }}"
+
     pacman:
       - 'aws-cli'
       - 'bc' # Arbitrary precision calculator language required by bonsai.sh.
+      - 'base-devel' # Needed to compile packages. Will see errors in yay if not installed.
       - 'blueman' # Blueman is a full featured Bluetooth manager written in GTK. Used to enable bluetooth widget in AwesomeWM.
       - 'bluez'
       - 'bluez-utils'
@@ -28,7 +33,6 @@
       - 'ktorrent' # Download and manage bittorrents.
       - 'kvantum-qt5' # Kvantum engine and theme manager for additional theme customizations.
       #  - 'plasma5-applets-active-window-control' # Enable window decorations panel in system settings.
-      - 'lm_sensors hddtemp' # Find hdd temperatures at login.
       - 'libappindicator-gtk3' # Resolves 'ValueError: Namespace AppIndicator3 not available after installing blueman.
       - 'lsof'
       - 'man'
@@ -51,25 +55,37 @@
       - 'yay' # Arch AUR helper.
         ## TODO: Need to detect whether using arch or manjaro and install appropriate modules.
         #      - 'virtualbox-host-modules-arch' # VirtualBox host modules needed for shared clipboard, bridged network, etc.
-      - 'linux56-virtualbox-host-modules' # Installs kernel specific version of host modules for Manjaro.
+      - 'linux58-virtualbox-host-modules' # Installs kernel specific version of host modules for Manjaro.
 
     yay:
-      - 'indicator-sound-switcher'
+      # TODO: fix dependencies not found in manjaro
+      # - 'indicator-sound-switcher'
       - 'nordvpn-bin'
-      # TODO: Fix proton install with yay
-      #      - 'proton' # Compatibility tool for Steam Play based on Wine and additional components.
       - 'realvnc-vnc-viewer'
       - 'slack-desktop'
       - 'terminus-font'
       - 'todotxt' # Command line todo list.
 
-    pip_install_packages:
-      - name: powerline-status
-      - name: powerline-gitstatus 
+    dotfiles_repo: "https://github.com/patkaehuaea/dotfiles"
+    dotfiles_repo_local_destination: "~/src/dotfiles"
+    dotfiles_home: "~"
+    dotfiles_files:
+        - .gitconfig
+        - .gitignore
+        - .shellaliases
+        - .shellfn
+        - .shellpaths
+        - .shellvars
+        - .tmux.conf
+        - .todo.cfg
+        - .vimrc
+        - .zlogin
+        - .zshenv
+        - .zshrc
 
   roles:
     - kewlfft.aur
-      #    - geerlingguy.pip
+    - geerlingguy.dotfiles
 
   tasks:
 
@@ -115,9 +131,10 @@
     # devices in VirtualBox.
     - name: adding current user to docker and vboxusers groups
       user:
-        name: "{{ ansible_user_id }}"
+        name: "{{ user }}"
         groups: docker,vboxusers
         append: yes
+      become: yes
 
     - name: Start and enable nordvpn service
       systemd:

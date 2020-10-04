@@ -15,10 +15,11 @@ Install ansible via pacman:
 $ sudo pacman -S ansible
 ```
 
-Install the Ansible AUR helper by running:
+Install prerequisite Ansible modules from the Ansible Galaxy:
 
 ```
 ansible-galaxy install kewlfft.aur
+ansible-galaxy install geerlingguy.dotfiles
 ```
 
 # main

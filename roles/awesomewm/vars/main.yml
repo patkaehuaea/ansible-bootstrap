@@ -4,8 +4,6 @@ home: "{{ lookup('env','HOME') }}"
 awesomewm_repo: "https://github.com/patkaehuaea/awesomewm-config.git"
 awesomewm_dest: "{{ home }}/src/awesomewm-config"
 awesomewm_config_dir: "{{ home }}/.config/awesome"
-awesomewm_user: "{{ ansible_user_id }}"
-awesomewm_group: "users"
 
 pacman:
   - 'maim' # Utility used by binary in AwesomeWM to take screenshots.
@@ -25,7 +23,7 @@ pacman:
 yay:
   - 'awesome-git'
   - 'rofi-git' # system menu
-  - 'system-san-francisco-font-git' # System font used in OSX.
+  - 'otf-san-francisco' # System font used in OSX.
   - 'ttf-material-design-icons' # Icon font used for glyphs.
   - 'ttf-iosevka' # Another font alternative.
   - 'ttf-nerd-fonts-hack-complete-git' # Collection of fonts used for glyph support.
