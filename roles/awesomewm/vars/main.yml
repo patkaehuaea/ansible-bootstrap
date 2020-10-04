@@ -26,5 +26,6 @@ yay:
   - 'otf-san-francisco' # System font used in OSX.
   - 'ttf-material-design-icons' # Icon font used for glyphs.
   - 'ttf-iosevka' # Another font alternative.
+  - 'powerline-fonts-git' # May conflict with other fonts and need manual intervention.
   - 'ttf-nerd-fonts-hack-complete-git' # Collection of fonts used for glyph support.
   - 'virtualbox-ext-oracle' # Needed for window resize in VirtualBox.
