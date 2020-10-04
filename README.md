@@ -7,6 +7,14 @@ base applications, and configures OSX.
 
 ## prerequisites
 
+### arch
+
+Install ansible via pacman:
+
+```
+$ sudo pacman -S ansible
+```
+
 Install the Ansible AUR helper by running:
 
 ```
@@ -22,7 +30,18 @@ BECOME password and allow privileged execution.
 ansible-playbook -K -i hosts main.yml
 ```
 
-## vim
+## arch
+
+Change the default shell to zsh when complete:
+
+```
+chsh -s /bin/zsh
+```
+
+
+## osx
+
+### vim
 
 Install vim plugins using Vundle from the command line.
 
@@ -36,7 +55,7 @@ Alternatively, install from within vim.
 :PluginInstall
 ```
 
-## iterm
+### iterm
 
 Ansible installs iTerm but we need to load preferences. This is how we retain
 settings like remapped keys (options, etc.) and color profiles.
