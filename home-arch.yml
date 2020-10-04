@@ -20,6 +20,7 @@
       - 'containerd' # Docker dependency
       - 'curl'
       - 'device-mapper' # Docker dependency
+      - 'discord' # Yet another chat client
       - 'dnsutils' #Includes utilities like 'dig' and 'host'
       - 'docker'
       - 'git'
@@ -63,6 +64,7 @@
       # TODO: fix dependencies not found in manjaro
       # - 'indicator-sound-switcher'
       - 'google-chrome'
+      - 'teams'
       - 'nordvpn-bin'
       - 'realvnc-vnc-viewer'
       - 'slack-desktop'
