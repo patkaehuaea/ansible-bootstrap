@@ -11,7 +11,10 @@
   git:
     repo: https://github.com/ohmyzsh/ohmyzsh.git
     dest: "{{ zsh_ohmyzsh }}"
-    clone: no
+    # If clone not set to 'yes' then ansible will do nothing on a new install.
+    # Set update to 'no' so that when there are changes, themes, etc. we won't fail clone.
+    clone: yes
+    update: no
 
 - name: Clone powerlevel9k oh-my-zsh theme
   git:
@@ -38,9 +41,3 @@
     dest: "{{ zsh_custom }}/themes/spaceship.zsh-theme"
     state: link
     force: yes
-
-- name: Change shell for user running playbook to zsh
-  user:
-    name: "{{ ansible_user_id }}"
-    shell: /bin/zsh
-  when: ansible_facts['os_family'] != "Darwin"
