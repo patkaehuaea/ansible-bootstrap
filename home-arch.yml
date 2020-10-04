@@ -49,7 +49,9 @@
       - 'virtualbox' # Use virtualbox-host-modules-arch.
       - 'wget'
       - 'yay' # Arch AUR helper.
-      - 'virtualbox-host-modules-arch' # VirtualBox host modules needed for shared clipboard, bridged network, etc.
+        ## TODO: Need to detect whether using arch or manjaro and install appropriate modules.
+        #      - 'virtualbox-host-modules-arch' # VirtualBox host modules needed for shared clipboard, bridged network, etc.
+      - 'linux56-virtualbox-host-modules' # Installs kernel specific version of host modules for Manjaro.
 
     yay:
       - 'indicator-sound-switcher'
@@ -61,15 +63,18 @@
       - 'terminus-font'
       - 'todotxt' # Command line todo list.
 
+    pip_install_packages:
+      - name: powerline-status
+      - name: powerline-gitstatus 
+
   roles:
     - kewlfft.aur
+      #    - geerlingguy.pip
 
   tasks:
 
     - include_role:
         name: common
-        name: awesomewm
-        name: i3wm
 
     - name: Run the equivalent of "pacman -Sy" before installs
       pacman:
@@ -120,3 +125,9 @@
         state: started
         name: nordvpnd.service
       become: yes
+
+    - include_role:
+        name: i3wm
+        name: awesomewm
+
+
