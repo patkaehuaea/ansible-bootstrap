@@ -11,12 +11,12 @@ pacman:
   - 'pamixer' # Wonderful CLI to configure pulseaudio settings. Useful since it doesn't allow volume > 100 by default.
   - 'papirus-icon-theme'
   - 'picom' # Picom is a standalone compositor for Xorg, suitable for use with window managers that do not provide compositing.
-  - 'powerline-fonts'
+  #  - 'powerline-fonts'
   - 'pulseaudio-bluetooth' # Bluetooth support for PulseAudio
   - 'ranger' # A VIM-inspired filemanager for the console https://ranger.github.io/
   - 'redshift' # Redshift adjusts the color temperature of your screen according to your surroundings. This may help your eyes hurt less if you are working in front of the screen at night.
   - 'ttf-font-awesome' # TTF (TrueType) font package for font-awesome.  Used initially for Awesome WM theme here: https://github.com/lcpz/awesome-copycats/tree/master/themes/vertex.
-  - 'ttf-hack' # TTF (TrueType) font package for hack font. Needed to display certain unicode characters in vim.
+  #- 'ttf-hack' # TTF (TrueType) font package for hack font. Needed to display certain unicode characters in vim.
   - 'wavemon' # Terminal based wifi utility.
   - 'xorg-xdpyinfo' # Verify that the X Server has properly detected the physical dimensions of your monitor e.g. xdpyinfo | grep -B 2 resolution
 
