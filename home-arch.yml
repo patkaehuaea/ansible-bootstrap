@@ -79,6 +79,7 @@
         - .config/rofi
         - .gitconfig
         - .gitignore
+        - .local
         - .shellaliases
         - .shellfn
         - .shellpaths
@@ -86,6 +87,11 @@
         - .tmux.conf
         - .todo.cfg
         - .vimrc
+        - .xinitrc
+        - .xprofile
+        - .Xresources
+        - .Xresources.d
+        - .xsession
         - .zlogin
         - .zshenv
         - .zshrc
