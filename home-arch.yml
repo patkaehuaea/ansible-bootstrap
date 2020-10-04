@@ -48,6 +48,7 @@
       - 'tree'
       - 'virtualbox' # Use virtualbox-host-modules-arch.
       - 'wget'
+      - 'yay' # Arch AUR helper.
       - 'virtualbox-host-modules-arch' # VirtualBox host modules needed for shared clipboard, bridged network, etc.
 
     yay:
@@ -59,6 +60,9 @@
       - 'slack-desktop'
       - 'terminus-font'
       - 'todotxt' # Command line todo list.
+
+  roles:
+    - kewlfft.aur
 
   tasks:
 
