@@ -33,6 +33,7 @@
       - 'macdown'
       - 'parallels'
       - 'slack'
+      - 'spotify'
       - 'xquartz'
 
     dotfiles_repo: "https://github.com/patkaehuaea/dotfiles"
