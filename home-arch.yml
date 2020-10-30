@@ -63,7 +63,9 @@
     yay:
       # TODO: fix dependencies not found in manjaro
       # - 'indicator-sound-switcher'
+      - 'autojump-git'
       - 'google-chrome'
+      - 'python-pywal' # Color theme generator.
       - 'teams'
       - 'nordvpn-bin'
       - 'realvnc-vnc-viewer'
