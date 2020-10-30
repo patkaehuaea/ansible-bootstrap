@@ -3,6 +3,8 @@ home: "{{ lookup('env','HOME') }}"
 directories:
   - "{{ home }}/.aws"
   - "{{ home }}/.azure"
+  # Needed for any dotfile linking for application configs under ~/.config. Link will fail if ~/.config does not exist.
+  - "{{ home }}/.config"
   - "{{ home }}/.ssh"
   - "{{ home }}/src"
 dotfiles_repo: "https://github.com/patkaehuaea/dotfiles.git"

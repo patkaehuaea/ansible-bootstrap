@@ -15,6 +15,7 @@
       - 'go'
       - 'gnupg'
       - 'htop'
+      - 'neofetch'
       - 'nmap'
       - 'packer'
       - 'terraform'
@@ -26,28 +27,31 @@
       - 'curl'
 
     cask:
-      - 'alacritty'
       - 'discord'
       - 'font-hack-nerd-font'
       - 'google-chrome'
       - 'macdown'
       - 'parallels'
       - 'slack'
+      - 'spotify'
       - 'xquartz'
 
     dotfiles_repo: "https://github.com/patkaehuaea/dotfiles"
     dotfiles_repo_local_destination: "~/src/dotfiles"
     dotfiles_home: "~"
     dotfiles_files:
+        - .config/kitty
         - .gitconfig
         - .gitignore
         - .shellaliases
         - .shellfn
         - .shellpaths
         - .shellvars
+        - .skhdrc
         - .tmux.conf
         - .todo.cfg
         - .vimrc
+        - .yabairc
         - .zlogin
         - .zshenv
         - .zshrc
@@ -83,6 +87,9 @@
         name: '{{ item }}'
         state: present
       loop: "{{ cask }}"
+
+    - include_role:
+        name: yabai
 
     - name: Automatically quit printer app once the print jobs complete
       shell: defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
