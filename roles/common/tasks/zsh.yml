@@ -33,9 +33,9 @@
   git:
     repo: https://github.com/denysdovhan/spaceship-prompt.git
     dest: "{{ zsh_custom }}/themes/spaceship-prompt"
-    clone: no
+    clone: yes
 
-- name: Create symlink for spaceship-prompt oh-my-zsh theme
+ name: Create symlink for spaceship-prompt oh-my-zsh theme
   file:
     src: "{{ zsh_custom }}/themes/spaceship-prompt/spaceship.zsh-theme"
     dest: "{{ zsh_custom }}/themes/spaceship.zsh-theme"
