@@ -24,6 +24,7 @@
       - 'dnsutils' #Includes utilities like 'dig' and 'host'
       - 'dmenu' # dynamic menu for X
       - 'docker'
+      - 'feh' # utility to set wallpaper background
       - 'git'
       - 'gtk-engine-murrine' # Murrine GTK+ Cairo Engine 
       - 'gtop' # Sweet implementation of htop in go. Did I saw sweet?
@@ -32,15 +33,13 @@
       - 'htop' # An interactive process viewer for Unix systems.
       - 'hwinfo'
       - 'kubectl' # CLI for kubernetes API
-      - 'kde-cli-tools' # Installs kwriteconfig5 and kreadconfig5 for updating KDE configs e.g. ~/.config/kwinrulesrc
-      - 'ktorrent' # Download and manage bittorrents.
-      - 'kvantum-qt5' # Kvantum engine and theme manager for additional theme customizations.
-      #  - 'plasma5-applets-active-window-control' # Enable window decorations panel in system settings.
       - 'libappindicator-gtk3' # Resolves 'ValueError: Namespace AppIndicator3 not available after installing blueman.
       - 'lsof'
       - 'man'
       - 'minikube' # Run a local kubernetes cluster.
       - 'neofetch' # Display system information in terminal.
+      - 'networkmanager' #  Daemon and CLI (nmcli) for managing network interfaces.
+      - 'network-manager-applet' # Handy system tray applet for managing network connections.
       - 'nmap'
       - 'openssh'
       - 'packer'
@@ -48,7 +47,6 @@
       - 'python-pip'
       - 'ranger' # A VIM-inspired filemanager for the console https://ranger.github.io/
       - 'samba' # Good 'ol SMB ; used to transfer backups from homeassistant
-      - 'signal-desktop' # Secure, cross-platform messaging app
       - 'spectacle'
       - 'steam' # Play games with Steam for Linux.
       - 'terminus-font-otb' # Play games with Steam for Linux.
@@ -56,23 +54,26 @@
       - 'tree'
       - 'virtualbox' # Use virtualbox-host-modules-arch.
       - 'wget'
+      - 'xdotool' # Command-line X11 automation tool
       - 'xmonad'
       - 'xmonad-contrib'
       - 'yay' # Arch AUR helper.
         ## TODO: Need to detect whether using arch or manjaro and install appropriate modules.
         #      - 'virtualbox-host-modules-arch' # VirtualBox host modules needed for shared clipboard, bridged network, etc.
-      - 'linux58-virtualbox-host-modules' # Installs kernel specific version of host modules for Manjaro.
+      - 'linux59-virtualbox-host-modules' # Installs kernel specific version of host modules for Manjaro.
 
     yay:
       # TODO: fix dependencies not found in manjaro
       # - 'indicator-sound-switcher'
-      - 'autojump-git'
+      - 'autojump-git' # Fast way to navigate filesystem.
       - 'google-chrome'
       - 'python-pywal' # Color theme generator.
       - 'teams'
       - 'nordvpn-bin'
+      - 'nerd-fonts-jetbrains-mono'
       - 'realvnc-vnc-viewer'
       - 'slack-desktop'
+      - 'spotify' # Music client
       - 'terminus-font'
       - 'todotxt' # Command line todo list.
 
@@ -86,7 +87,6 @@
         - .config/rofi
         - .gitconfig
         - .gitignore
-        - .local
         - .shellaliases
         - .shellfn
         - .shellpaths
@@ -128,6 +128,13 @@
       aur:
         name: '{{ item }}'
       loop: '{{ yay }}'
+
+    - name: Clone oh-my-zsh git repository
+      git:
+        repo: https://github.com/ohmyzsh/ohmyzsh.git
+        dest: "~/src"
+        clone: yes
+        update: yes
 
     - name: Make sure bluetooth is enabled and running
       systemd:
