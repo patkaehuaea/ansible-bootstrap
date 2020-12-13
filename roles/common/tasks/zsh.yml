@@ -20,7 +20,8 @@
   git:
     repo: https://github.com/bhilburn/powerlevel9k.git
     dest: "{{ zsh_custom }}/themes/powerlevel9k"
-    clone: no
+    bare: yes
+    force: yes
 
 - name: Create symlink for powerlevel9k oh-my-zsh theme
   file:
