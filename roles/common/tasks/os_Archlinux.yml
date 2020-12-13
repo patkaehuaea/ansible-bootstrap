@@ -12,6 +12,25 @@
   loop: "{{ pacman }}"
   become: yes
 
+- name: Stat /usr/bin/yay and get sha256 checksum
+  stat:
+    path: /usr/bin/yay
+    checksum_algorithm: sha256
+  register: yay_reg
+
+- name: Clone yay to destination
+  git:
+    repo: https://aur.archlinux.org/yay.git
+    dest: "{{ clone_dest }}/yay"
+    clone: yes
+    update: yes
+
+- name: Build yay using makepkg
+  command: "makepkg --syncdeps --install --noconfirm"
+  args:
+    chdir: "{{ clone_dest }}/yay"
+  when: yay_reg.stat.isreg is not defined
+
 - name: use yay to install applications from the AUR
   aur:
     name: '{{ item }}'
