@@ -48,10 +48,12 @@ pacman:
   - 'tree'
   - 'virtualbox' # Use virtualbox-host-modules-arch.
   - 'wget'
+  - 'vim'
   - 'xdotool' # Command-line X11 automation tool
   - 'xorg-xrdb' # Provides 'xrdb' utility used in .Xresources file.
   - 'xmonad'
   - 'xmonad-contrib'
+  - 'zsh'
   # Conflicts with virtualbox-host-modules-dkms ... see if works then delete.
   #- 'virtualbox-host-modules-arch' # VirtualBox host modules needed for shared clipboard, bridged network, etc.
 
