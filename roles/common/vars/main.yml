@@ -6,6 +6,7 @@ directories:
   # Needed for any dotfile linking for application configs under ~/.config. Link will fail if ~/.config does not exist.
   - "{{ home }}/.config"
   - "{{ home }}/.ssh"
+  - "{{ home }}/go"
   - "{{ home }}/src"
 dotfiles_repo: "https://github.com/patkaehuaea/dotfiles.git"
 dotfiles_dest: "{{ home }}/src/dotfiles"
