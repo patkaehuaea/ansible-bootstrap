@@ -1,9 +1,15 @@
 ---
 
+- name: Set OS distribution dependent variables
+  include_vars: os_{{ ansible_facts['os_family'] }}.yml
+
 - name: Create configuration and source directories
   file: path={{ item }} state=directory
   with_items:
     - "{{ directories }}"
+
+- name: Include OS distribution dependent tasks
+  include_tasks: tasks/os_{{ ansible_facts['os_family'] }}.yml
 
 - include_tasks: vim.yml
 - include_tasks: zsh.yml

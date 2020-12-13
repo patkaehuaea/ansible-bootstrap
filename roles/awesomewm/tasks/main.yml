@@ -9,7 +9,7 @@
   pacman:
     name: '{{ item }}'
     state: present
-  loop: "{{ pacman }}"
+  loop: "{{ awesomewm_pacman }}"
   become: yes
 
 - name: use yay to install applications from the AUR
@@ -17,7 +17,7 @@
     use: yay
     name: '{{ item }}'
     state: present
-  loop: "{{ yay }}"
+  loop: "{{ awesomewm_yay }}"
 
 - name: clone awesomewm-config repository
   git:

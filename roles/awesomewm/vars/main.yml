@@ -5,7 +5,7 @@ awesomewm_repo: "https://github.com/patkaehuaea/awesomewm-config.git"
 awesomewm_dest: "{{ home }}/src/awesomewm-config"
 awesomewm_config_dir: "{{ home }}/.config/awesome"
 
-pacman:
+awesomewm_pacman:
   - 'maim' # Utility used by binary in AwesomeWM to take screenshots.
   - 'otf-font-awesome' # OTF (OpenType) font package for font-awesome. Used initially for Awesome WM theme here: https://github.com/lcpz/awesome-copycats/tree/master/themes/vertex.
   - 'pamixer' # Wonderful CLI to configure pulseaudio settings. Useful since it doesn't allow volume > 100 by default.
@@ -19,8 +19,9 @@ pacman:
   #- 'ttf-hack' # TTF (TrueType) font package for hack font. Needed to display certain unicode characters in vim.
   - 'wavemon' # Terminal based wifi utility.
   - 'xorg-xdpyinfo' # Verify that the X Server has properly detected the physical dimensions of your monitor e.g. xdpyinfo | grep -B 2 resolution
+  - 'feh' # utility to set wallpaper background
 
-yay:
+awesomewm_yay:
   - 'awesome-git'
   - 'rofi-git' # system menu
   - 'otf-san-francisco' # System font used in OSX.
