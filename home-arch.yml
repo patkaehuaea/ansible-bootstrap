@@ -44,6 +44,9 @@
     - include_role:
         name: awesomewm
 
+    - include_role:
+        name: xmonad
+
     # Do last since this will kill the run and
     # boot user to sddm login.
     - name: Make sure the display manager is running

@@ -1,0 +1,38 @@
+---
+
+- name: Run the equivalent of "pacman -Sy" before installs
+  pacman:
+    update_cache: yes
+  become: yes
+
+- name: Install applications with pacman
+  pacman:
+    name: '{{ item }}'
+    state: present
+  loop: "{{ xmonad_pacman }}"
+  become: yes
+
+- name: use yay to install applications from the AUR
+  aur:
+    use: yay
+    name: '{{ item }}'
+    state: present
+  loop: "{{ xmonad_yay }}"
+
+- name: clone xmonad-config repository
+  git:
+    repo: '{{ xmonad_repo }}'
+    dest: '{{ xmonad_dest }}'
+
+- name: create ~/.xmonad symlink
+  file:
+    src: '{{ xmonad_dest }}' 
+    dest: '{{ xmonad_config_dir }}'
+    owner: '{{ ansible_user_id }}'
+    group:  '{{ ansible_user_gid }}'
+    state: link
+
+- name: clone wallpaper repository
+  git:
+    repo: '{{ xmonad_wallpapers_repo }}'
+    dest: '{{ xmonad_wallpapers_dest }}'
