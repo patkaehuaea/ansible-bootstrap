@@ -26,6 +26,8 @@ pacman:
   - 'hwinfo'
   - 'kubectl' # CLI for kubernetes API
   - 'libappindicator-gtk3' # Resolves 'ValueError: Namespace AppIndicator3 not available after installing blueman.
+  - 'lightdm' # Simple Desktop Display Manager - login GUI.
+  - 'lightdm-webkit-theme-aether' # A sleek, straightforward Archlinux themed login screen written on lightdm and the lightdm-webkit2-greeter.
   - 'lsof'
   - 'make'
   - 'man'
@@ -41,7 +43,6 @@ pacman:
   - 'python-pip'
   - 'ranger' # A VIM-inspired filemanager for the console https://ranger.github.io/
   - 'samba' # Good 'ol SMB ; used to transfer backups from homeassistant
-  - 'sddm' # Simple Desktop Display Manager - login GUI.
   - 'spectacle'
   - 'terminus-font-otb' # Play games with Steam for Linux.
   - 'tmux' # A terminal multiplexer: tmux enables a number of terminals to be created, accessed, and controlled from a single screen.

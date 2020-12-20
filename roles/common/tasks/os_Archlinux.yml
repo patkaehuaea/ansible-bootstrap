@@ -72,3 +72,12 @@
     state: started
     name: nordvpnd.service
   become: yes
+
+# Do last since this will kill the run and
+# boot user to sddm login.
+- name: Make sure the display manager is running
+  systemd:
+    enabled: yes
+    state: started
+    name: lightdm.service
+  become: yes
