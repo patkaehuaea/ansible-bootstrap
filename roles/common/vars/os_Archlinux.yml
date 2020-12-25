@@ -47,6 +47,7 @@ pacman:
   - 'terminus-font-otb' # Play games with Steam for Linux.
   - 'tmux' # A terminal multiplexer: tmux enables a number of terminals to be created, accessed, and controlled from a single screen.
   - 'tree'
+  - 'udisks2' # udisks provides a daemon udisksd, that implements D-Bus interfaces used to query and manipulate storage devices, and a command-line tool udisksctl, used to query and use the daemon.
   - 'usbutils' # Collection of utilities like lsusb and lspci for managing devices.
   - 'virtualbox' # Use virtualbox-host-modules-arch.
   - 'wget'
