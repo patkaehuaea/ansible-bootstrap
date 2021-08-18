@@ -24,6 +24,7 @@ pacman:
   - 'gwenview' # Gwenview is a fast and easy to use image viewer by KDE, ideal for browsing and displaying a collection of images.
   - 'htop' # An interactive process viewer for Unix systems.
   - 'hwinfo'
+  - 'jq' # CLI JSON processor. Needed to parse location data for redshift.
   - 'kubectl' # CLI for kubernetes API
   - 'libappindicator-gtk3' # Resolves 'ValueError: Namespace AppIndicator3 not available after installing blueman.
   - 'lightdm' # Simple Desktop Display Manager - login GUI.
