@@ -10,14 +10,19 @@
       - 'azure-cli'
       - 'dep'
       - 'docker'
+      - 'fish' # shell
+      - 'fisher' # plugin manager for fish shell
       - 'gdb'
       - 'git'
       - 'go'
       - 'gnupg'
       - 'htop'
+      - 'jq'
       - 'neofetch'
       - 'nmap'
       - 'packer'
+      - 'pyenv'
+      - 'starship' # shell prompt
       - 'terraform'
       - 'todo-txt'
       - 'toilet'
@@ -27,12 +32,12 @@
       - 'curl'
 
     cask:
+      - 'alacritty' # terminal emulator
       - 'discord'
       - 'font-hack-nerd-font'
-      - 'google-chrome'
       - 'macdown'
-      - 'parallels'
       - 'slack'
+      - 'spaceman' # view Mission Control spaces in menu bar
       - 'spotify'
       - 'xquartz'
 
@@ -40,6 +45,8 @@
     dotfiles_repo_local_destination: "~/src/dotfiles"
     dotfiles_home: "~"
     dotfiles_files:
+        - .config/alacritty
+        - .config/fish/config.fish
         - .config/kitty
         - .gitconfig
         - .gitignore
@@ -90,6 +97,9 @@
 
     - include_role:
         name: yabai
+
+    - name: install jethrokuan/z plugin
+      shell: fisher install jethrokuan/z
 
     - name: Automatically quit printer app once the print jobs complete
       shell: defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true

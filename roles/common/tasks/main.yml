@@ -62,3 +62,9 @@
     dest: "{{ zsh_custom }}/themes/spaceship.zsh-theme"
     state: link
     force: yes
+
+- name: Clone zsh-autosuggestions plugin
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: "{{ zsh_custom }}/plugins/zsh-autosuggestions"
+    clone: yes
