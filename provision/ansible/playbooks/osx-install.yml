@@ -1,0 +1,65 @@
+---
+
+- hosts: localhost
+
+  vars:
+
+    brew:
+      - 'age'
+      - 'azure-cli'
+      - 'curl'
+      - 'direnv'
+      - 'dep'
+      - 'docker'
+      - 'fish' # shell
+      - 'fisher' # plugin manager for fish shell
+      - 'git'
+      - 'go'
+      - 'gnupg'
+      - 'htop'
+      - 'jq'
+      - 'neofetch'
+      - 'prettier'
+      - 'pyenv'
+      - 'sops'
+      - 'starship' # shell prompt
+      - 'stern'
+      - 'terraform'
+      - 'tflint'
+      - 'todo-txt'
+      - 'tree'
+      - 'vim'
+      - 'wget'
+      - 'yamllint'
+      - 'yq'
+
+    cask:
+      - 'discord'
+      - 'font-hack-nerd-font'
+      - 'kitty'
+      - 'macdown'
+      - 'microsoft-teams'
+      - 'slack'
+      - 'spaceman' # view Mission Control spaces in menu bar
+      - 'spotify'
+      - 'visual-studio-code'
+
+  tasks:
+
+    - name: Install applications with homebrew
+      homebrew:
+        name: '{{ item }}'
+        state: present
+        update_homebrew: yes
+      loop: "{{ brew }}"
+
+    - name: Install fonts with homebrew tap
+      # Need to restart iTerm for 'Hack Nerd Font' to be available.
+      homebrew_tap:
+        name: homebrew/cask-fonts
+
+    - name: Install applications with homebrew cask
+      homebrew_cask:
+        name: '{{ item }}'
+        state: present
+      loop: "{{ cask }}"

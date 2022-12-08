@@ -2,65 +2,25 @@
 
 - hosts: localhost
 
-  vars:
-
-    brew:
-      - 'autojump'
-      - 'awscli'
-      - 'azure-cli'
-      - 'dep'
-      - 'docker'
-      - 'gdb'
-      - 'git'
-      - 'go'
-      - 'gnupg'
-      - 'htop'
-      - 'nmap'
-      - 'packer'
-      - 'terraform'
-      - 'todo-txt'
-      - 'tree'
-      - 'vim'
-      - 'wget'
-      - 'curl'
-
-    cask:
-      - 'chef-workstation'
-      - 'font-hack-nerd-font'
-      - 'iterm2'
-      - 'keepassx'
-      - 'macdown'
-      - 'microsoft-teams'
-      - 'slack'
-      - 'vagrant'
-      - 'vagrant-manager'
-      - 'virtualbox'
-
   tasks:
+    - osx_defaults:
+        domain: com.apple.Safari
+        key: IncludeInternalDebugMenu
+        type: bool
+        value: true  
 
-    - name: Install applications with homebrew
-      homebrew:
-        name: '{{ item }}'
-        state: present
-        update_homebrew: yes
-      loop: "{{ brew }}"
+    - name: Use vim-plug to install plugins on the command line
+      ansible.builtin.shell: vim -es -u ~/.vimrc -i NONE -c "PlugInstall" -c "qa"
+      args:
+        executable: /opt/homebrew/bin/fish
+      # Even when this works, the command still exits 1.
+      # ref: https://github.com/junegunn/vim-plug/wiki/tips#install-plugins-on-the-command-line
+      ignore_errors: true
 
-    - name: Install fonts with homebrew tap
-      # Need to restart iTerm for 'Hack Nerd Font' to be available.
-      homebrew_tap:
-        name: homebrew/cask-fonts
-
-    - name: Install applications with homebrew cask
-      homebrew_cask:
-        name: '{{ item }}'
-        state: present
-     loop: "{{ cask }}"
-
-      # Requests module used by the iterm2 integration
-      # as sourced by ~/.profile.
-    - pip:
-        name: requests
-        extra_args: --user
+    - name: install jethrokuan/z plugin
+      ansible.builtin.shell: fisher install jethrokuan/z
+      args:
+        executable: /opt/homebrew/bin/fish
 
     - name: Automatically quit printer app once the print jobs complete
       shell: defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
@@ -92,8 +52,5 @@
     - name: Show Mounted Servers on the Desktop
       shell: defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 
-    - name: Show Hidden Files
-      shell: defaults write com.apple.finder AppleShowAllFiles -bool true
-
-    - name: Kill finder to apply changes
-      shell: killall -HUP Finder
+    - name: Don’t automatically rearrange Spaces based on most recent use
+      shell: defaults write com.apple.dock mru-spaces -bool false

@@ -1,0 +1,40 @@
+---
+
+- hosts: localhost
+
+  vars:
+
+    home: "{{ lookup('env','HOME') }}"
+    directories:
+      - "{{ home }}/.config/"
+
+    dotfiles_repo: "https://github.com/patkaehuaea/dotfiles"
+    dotfiles_repo_local_destination: "~/src/dotfiles"
+    dotfiles_home: "~"
+    dotfiles_files:
+        - .config/fish
+        - .config/kitty
+        - .gitconfig
+        - .gitignore
+        - .shellaliases
+        - .shellfn
+        - .shellpaths
+        - .shellvars
+        - .skhdrc
+        - .todo.cfg
+        - .vimrc
+        - .zlogin
+        - .zshenv
+        - .zshrc
+
+  pre_tasks:
+    - name: Create configuration and source directories
+      file: path={{ item }} state=directory
+      with_items:
+        - "{{ directories }}"
+
+  tasks:
+
+    - include_role:
+        name: geerlingguy.dotfiles
+
