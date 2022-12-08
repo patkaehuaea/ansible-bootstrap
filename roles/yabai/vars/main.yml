@@ -1,7 +1,0 @@
----
-home: "{{ lookup('env','HOME') }}"
-yabai_config_repo: "https://github.com/patkaehuaea/yabai-config.git"
-yabai_src: "{{ home }}/src/yabai-config/.yabairc"
-yabai_dest: "{{ home }}/.yabairc"
-skhd_src: "{{ home }}/src/yabai-config/.skhdrc"
-skhd_dest: "{{ home }}/.skhdrc"
