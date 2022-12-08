@@ -11,8 +11,8 @@
       - 'direnv'
       - 'dep'
       - 'docker'
-      - 'fish' # shell
-      - 'fisher' # plugin manager for fish shell
+      - 'fish'                    # shell
+      - 'fisher'                  # plugin manager for fish shell
       - 'git'
       - 'go'
       - 'gnupg'
@@ -22,7 +22,7 @@
       - 'prettier'
       - 'pyenv'
       - 'sops'
-      - 'starship' # shell prompt
+      - 'starship'                # shell prompt
       - 'stern'
       - 'terraform'
       - 'tflint'
@@ -34,13 +34,12 @@
       - 'yq'
 
     cask:
-      - 'discord'
       - 'font-hack-nerd-font'
       - 'kitty'
       - 'macdown'
       - 'microsoft-teams'
       - 'slack'
-      - 'spaceman' # view Mission Control spaces in menu bar
+      - 'spaceman'                # view Mission Control spaces in menu bar
       - 'spotify'
       - 'visual-studio-code'
 
