@@ -10,7 +10,6 @@
       - 'curl'
       - 'direnv'
       - 'dep'
-      - 'docker'
       - 'fish'                    # shell
       - 'fisher'                  # plugin manager for fish shell
       - 'git'
@@ -34,13 +33,13 @@
       - 'yq'
 
     cask:
+      - 'docker'
       - 'font-hack-nerd-font'
       - 'kitty'
       - 'macdown'
       - 'microsoft-teams'
       - 'slack'
       - 'spaceman'                # view Mission Control spaces in menu bar
-      - 'spotify'
       - 'visual-studio-code'
 
   tasks:
@@ -58,7 +57,7 @@
         name: homebrew/cask-fonts
 
     - name: Install applications with homebrew cask
-      homebrew_cask:
+      community.general.homebrew_cask:
         name: '{{ item }}'
         state: present
       loop: "{{ cask }}"
