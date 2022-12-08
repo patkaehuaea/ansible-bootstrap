@@ -7,7 +7,7 @@
         domain: com.apple.Safari
         key: IncludeInternalDebugMenu
         type: bool
-        value: true  
+        value: true
 
     - name: Use vim-plug to install plugins on the command line
       ansible.builtin.shell: vim -es -u ~/.vimrc -i NONE -c "PlugInstall" -c "qa"
