@@ -67,3 +67,25 @@
         name: '{{ item }}'
         state: present
       loop: "{{ cask }}"
+
+    # Homebrew executable path is different on x86 versus Apple silicon.
+    - name: Use vim-plug to install plugins on the command line
+      ansible.builtin.shell: vim -es -u ~/.vimrc -i NONE -c "PlugInstall" -c "qa"
+      args:
+        executable: /opt/homebrew/bin/fish
+      # Even when this works, the command still exits 1.
+      # ref: https://github.com/junegunn/vim-plug/wiki/tips#install-plugins-on-the-command-line
+      ignore_errors: true
+
+    # Different brew install directories for Intal vs. Apple Silicon Macs
+    - name: install jethrokuan/z plugin
+      ansible.builtin.shell: fisher install jethrokuan/z
+      args:
+        executable: /opt/homebrew/bin/fish
+      when: ansible_architecture != "x86_64"
+
+    - name: install jethrokuan/z plugin
+      ansible.builtin.shell: fisher install jethrokuan/z
+      args:
+        executable: /usr/local/bin/fish
+      when: ansible_architecture == "x86_64"
