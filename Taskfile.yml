@@ -4,28 +4,28 @@ version: "3"
 vars:
   PROJECT_DIR:
     sh: "git rev-parse --show-toplevel"
-  CLUSTER_DIR: "{{.PROJECT_DIR}}/cluster"
-  ANSIBLE_DIR: "{{.PROJECT_DIR}}/provision/ansible"
-  TERRAFORM_DIR: "{{.PROJECT_DIR}}/provision/terraform"
+  ANSIBLE_PLAYBOOK_DIR: "{{.PROJECT_DIR}}/playbooks"
+  ANSIBLE_INVENTORY_DIR: "{{.PROJECT_DIR}}/inventory"
+
+env:
+  ANSIBLE_CONFIG: "{{.PROJECT_DIR}}/ansible.cfg"
 
 dotenv: [".config.env"]
 
-env:
-  KUBECONFIG: "{{.PROJECT_DIR}}/provision/kubeconfig"
-
-includes:
-  ansible: .taskfiles/AnsibleTasks.yml
-#  cluster: .taskfiles/ClusterTasks.yml
-#  precommit: .taskfiles/PrecommitTasks.yml
-#  terraform: .taskfiles/TerraformTasks.yml
-#  sops: .taskfiles/SopsTasks.yml
-
 tasks:
 
+  default:
+    cmds:
+      - task: init
+      - task: osx
+      - task: install
+      - task: dotfiles
+
   init:
-    desc: Initialize workstation dependencies with Brew
+    desc: Install Ansible and dependencies.
     cmds:
       - brew install {{.DEPS}} {{.CLI_ARGS}}
+      - ansible-galaxy install -r {{.PROJECT_DIR}}/requirements.yml --roles-path ~/.ansible/roles --force
     preconditions:
       - sh: command -v brew
         msg: |
@@ -36,12 +36,17 @@ tasks:
         ansible
         go-task/tap/go-task
 
-  verify:
-    desc: Verify env settings
+  osx:
+    desc: Configure OSX defaults.
     cmds:
-      - ./configure --verify
+      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts {{.ANSIBLE_PLAYBOOK_DIR}}/osx-defaults.yml
 
-  configure:
-    desc: Configure repository from env settings
+  install:
+    desc: Install packages with Ansible.
     cmds:
-      - ./configure
+      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts {{.ANSIBLE_PLAYBOOK_DIR}}/osx-install.yml
+
+  dotfiles:
+    desc: Clone then symlink dotfiles.
+    cmds:
+      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts {{.ANSIBLE_PLAYBOOK_DIR}}/osx-dotfiles.yml
