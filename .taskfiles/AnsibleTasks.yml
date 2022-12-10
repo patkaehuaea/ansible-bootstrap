@@ -15,7 +15,7 @@ tasks:
   init:
     desc: Install / Upgrade Ansible galaxy deps
     cmds:
-      - ansible-galaxy install -r {{.PROJECT_DIR}}/requirements.yml --roles-path ~/.ansible/roles --force
+      - ansible-galaxy install -r {{.PROJECT_DIR}}/requirements.yml --force
 
   run:
     desc: Install / Upgrade Ansible galaxy deps

@@ -29,11 +29,12 @@
 
   pre_tasks:
     - name: Create configuration and source directories
-      file: path={{ item }} state=directory
+      ansible.builtin.file: path={{ item }} state=directory
       with_items:
         - "{{ directories }}"
 
   tasks:
 
-    - include_role:
+    - name: Run geeerlingguy.dotfiles role
+      ansible.builtin.include_role:
         name: geerlingguy.dotfiles

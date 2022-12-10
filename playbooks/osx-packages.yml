@@ -45,8 +45,7 @@
 
   tasks:
 
-    # Update homebrew and upgrade all packages
-    - name:
+    - name: Update homebrew and upgrade all packages
       community.general.homebrew:
         upgrade_all: true
 
@@ -54,7 +53,7 @@
       homebrew:
         name: '{{ item }}'
         state: present
-        update_homebrew: yes
+        update_homebrew: true
       loop: "{{ brew }}"
 
     - name: Install fonts with homebrew tap
@@ -78,13 +77,13 @@
       ignore_errors: true
 
     # Different brew install directories for Intal vs. Apple Silicon Macs
-    - name: install jethrokuan/z plugin
+    - name: Install jethrokuan/z plugin
       ansible.builtin.shell: fisher install jethrokuan/z
       args:
         executable: /opt/homebrew/bin/fish
       when: ansible_architecture != "x86_64"
 
-    - name: install jethrokuan/z plugin
+    - name: Install jethrokuan/z plugin
       ansible.builtin.shell: fisher install jethrokuan/z
       args:
         executable: /usr/local/bin/fish

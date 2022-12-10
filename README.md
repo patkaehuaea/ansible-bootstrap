@@ -7,34 +7,46 @@ base applications, and configures OSX.
 
 ## prerequisites
 
-Install xcode and homebrew
-
-xcode: ## Runs 'xcode-select --install' to install xcode and git.
-
-homebrew: ## Installs homebrew for OSX.
-    # Bypass need to hit RETURN key by using piping to yes.
-    @yes '' | /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-
-# main
-
+1. xcode
+2. homebrew
+3. go-task
 
 ```
-chsh -s /opt/homebrew/bin/fish
+$ xcode-select --install
+
+$ @yes '' | /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+$ brew install go-task/tap/go-task
 ```
 
+## run
 
-## osx
-
-### vim
-
-Install vim plugins using Vundle from the command line.
+Run the default task to boostrap:
 
 ```
-vim +PluginInstall +qall
+$ task
 ```
 
-Alternatively, install from within vim.
+Set fish as default shell after install:
 
 ```
-:PluginInstall
+$ sudo echo "/opt/homebrew/bin/fish" >> /etc/shells
+
+$ chsh -s /opt/homebrew/bin/fish
+```
+
+## list
+
+List all available tasks:
+
+```
+$ task -l
+```
+
+## pre-commit
+
+Run pre-commit hooks:
+
+```
+$ task precommit:run
 ```

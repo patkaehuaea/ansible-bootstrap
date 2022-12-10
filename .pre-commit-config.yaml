@@ -8,6 +8,15 @@ repos:
           - --config-file
           - .yamllint.yaml
         id: yamllint
+
+  - repo: https://github.com/ansible/ansible-lint.git
+    rev: v6.9.1
+    hooks:
+      - args:
+          - -c
+          - .ansible-lint.yaml
+        id: ansible-lint
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:
