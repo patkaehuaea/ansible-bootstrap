@@ -18,6 +18,7 @@
       - 'htop'
       - 'jq'
       - 'neofetch'
+      - 'pre-commit'
       - 'prettier'
       - 'pyenv'
       - 'sops'
@@ -43,6 +44,11 @@
       - 'visual-studio-code'
 
   tasks:
+
+    # Update homebrew and upgrade all packages
+    - name:
+      community.general.homebrew:
+        upgrade_all: true
 
     - name: Install applications with homebrew
       homebrew:

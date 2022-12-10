@@ -12,20 +12,23 @@ env:
 
 dotenv: [".config.env"]
 
+includes:
+  ansible: .taskfiles/AnsibleTasks.yml
+  precommit: .taskfiles/PrecommitTasks.yml
+
 tasks:
 
   default:
     cmds:
       - task: init
-      - task: osx
-      - task: install
-      - task: dotfiles
+      - task: ansible:init
+      - task: precommit:init
+      - task: ansible:run
 
   init:
     desc: Install Ansible and dependencies.
     cmds:
       - brew install {{.DEPS}} {{.CLI_ARGS}}
-      - ansible-galaxy install -r {{.PROJECT_DIR}}/requirements.yml --roles-path ~/.ansible/roles --force
     preconditions:
       - sh: command -v brew
         msg: |
@@ -35,18 +38,3 @@ tasks:
       DEPS: >-
         ansible
         go-task/tap/go-task
-
-  osx:
-    desc: Configure OSX defaults.
-    cmds:
-      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts {{.ANSIBLE_PLAYBOOK_DIR}}/osx-defaults.yml
-
-  install:
-    desc: Install packages with Ansible.
-    cmds:
-      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts {{.ANSIBLE_PLAYBOOK_DIR}}/osx-install.yml
-
-  dotfiles:
-    desc: Clone then symlink dotfiles.
-    cmds:
-      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts {{.ANSIBLE_PLAYBOOK_DIR}}/osx-dotfiles.yml

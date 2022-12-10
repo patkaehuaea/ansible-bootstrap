@@ -1,31 +1,40 @@
 ---
 version: "3"
 
+vars:
+  PROJECT_DIR:
+    sh: "git rev-parse --show-toplevel"
+  ANSIBLE_PLAYBOOK_DIR: "{{.PROJECT_DIR}}/playbooks"
+  ANSIBLE_INVENTORY_DIR: "{{.PROJECT_DIR}}/inventory"
+
 env:
   ANSIBLE_CONFIG: "{{.PROJECT_DIR}}/ansible.cfg"
-
-vars:
-  ANSIBLE_PLAYBOOK_DIR: "{{.ANSIBLE_DIR}}/playbooks"
-  ANSIBLE_INVENTORY_DIR: "{{.ANSIBLE_DIR}}/inventory"
 
 tasks:
 
   init:
     desc: Install / Upgrade Ansible galaxy deps
-    dir: provision/ansible
     cmds:
-      - ansible-galaxy install -r requirements.yml --roles-path ~/.ansible/roles --force
+      - ansible-galaxy install -r {{.PROJECT_DIR}}/requirements.yml --roles-path ~/.ansible/roles --force
 
-  install:
-    desc: Install apps and dependencies
-    dir: provision/ansible
+  run:
+    desc: Install / Upgrade Ansible galaxy deps
     cmds:
-      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts {{.ANSIBLE_PLAYBOOK_DIR}}/osx-install.yml
+      - task: osx
+      - task: packages
+      - task: dotfiles
 
-  configure:
-    desc: Configure OSX with defaults
-    dir: provision/ansible
+  osx:
+    desc: Install packages with Ansible and configure defaults.
     cmds:
-      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts {{.ANSIBLE_PLAYBOOK_DIR}}/osx-configure.yml
+      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts {{.ANSIBLE_PLAYBOOK_DIR}}/osx-defaults.yml
+
+  packages:
+    desc: Install packages with Ansible.
+    cmds:
+      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts {{.ANSIBLE_PLAYBOOK_DIR}}/osx-packages.yml
+
+  dotfiles:
+    desc: Update dotfiles.
+    cmds:
       - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts {{.ANSIBLE_PLAYBOOK_DIR}}/osx-dotfiles.yml
-

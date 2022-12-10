@@ -1,0 +1,6 @@
+---
+extends: default
+
+rules:
+  # disable 80 char line check
+  line-length: disable
