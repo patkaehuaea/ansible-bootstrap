@@ -1,45 +1,78 @@
 ---
 
-- hosts: localhost
+- name: Play for applying default OSX settings.
+  hosts: localhost
 
   tasks:
 
-    - name: Enable Safari debug menu
+    - name: Automatically quit printer app once the print jobs complete
       community.general.osx_defaults:
-        domain: com.apple.Safari
-        key: IncludeInternalDebugMenu
+        domain: com.apple.print.PrintingPrefs
+        key: "Quit When Finished"
         type: bool
         value: true
-
-    - name: Automatically quit printer app once the print jobs complete
-      ansible.builtin.command: defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+        state: present
 
     - name: Disable smart quotes as they're annoying when typing code
-      ansible.builtin.command: defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: NSAutomaticQuoteSubstitutionEnabled
+        type: bool
+        value: false
+        state: present
 
     - name: Disable smart dashes as they're annoying when typing code
-      ansible.builtin.command: defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: NSAutomaticDashSubstitutionEnabled
+        type: bool
+        value: false
+        state: present
 
     - name: Disable the "Are you sure you want to open this application?" dialog
       ansible.builtin.command: defaults write com.apple.LaunchServices LSQuarantine -bool false
+      register: my_output
+      # Output will be '0' if 'false' and '1' if 'true' (enabled).
+      changed_when: my_output != 1
 
     - name: Disable the crash reporter
       ansible.builtin.command: defaults write com.apple.CrashReporter DialogType -string "none"
-
-    - name: Show ~/Library
-      ansible.builtin.command: chflags nohidden ~/Library
+      register: my_output
+      # Use the return code to define when the task has changed.
+      changed_when: my_output != "none"
 
     - name: Show Drives on the Desktop
       ansible.builtin.command: defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+      register: my_output
+      # Use the return code to define when the task has changed.
+      changed_when: my_output.rc != "none"
 
     - name: Show External Drives on the Desktop
       ansible.builtin.command: defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+      register: my_output
+      # Use the return code to define when the task has changed.
+      changed_when: my_output.rc != 0
 
     - name: Show Removable Media on the Desktop
       ansible.builtin.command: defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+      register: my_output
+      # Use the return code to define when the task has changed.
+      changed_when: my_output.rc != 0
 
     - name: Show Mounted Servers on the Desktop
       ansible.builtin.command: defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+      register: my_output
+      # Use the return code to define when the task has changed.
+      changed_when: my_output.rc != 0
 
     - name: Don't automatically rearrange Spaces based on most recent use
       ansible.builtin.command: defaults write com.apple.dock mru-spaces -bool false
+      register: my_output
+      # Use the return code to define when the task has changed.
+      changed_when: my_output.rc != 1
+
+    - name: Enable key repeating for VS Code's VIM extension
+      ansible.builtin.command: defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+      register: my_output
+      # Use the return code to define when the task has changed.
+      changed_when: my_output.rc != 1

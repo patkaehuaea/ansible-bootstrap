@@ -1,6 +1,7 @@
 ---
 
-- hosts: localhost
+- name: Playbook to manage dotfiles.
+  hosts: localhost
 
   vars:
 
@@ -23,13 +24,17 @@
       - .skhdrc
       - .todo.cfg
       - .vimrc
+      - .vscode
       - .zlogin
       - .zshenv
       - .zshrc
 
   pre_tasks:
     - name: Create configuration and source directories
-      ansible.builtin.file: path={{ item }} state=directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        mode: 0755
+        state: directory
       with_items:
         - "{{ directories }}"
 

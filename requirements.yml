@@ -6,3 +6,5 @@ collections:
 roles:
   - name: geerlingguy.dotfiles
     version: 1.2.1
+  - name: gantsign.visual-studio-code
+    version: 6.11.0

@@ -1,11 +1,13 @@
 ---
 
-- hosts: localhost
+- name: Play for installing packages with homebrew then configuring them.
+  hosts: localhost
 
   vars:
 
     brew:
       - 'age'
+      - 'ansible-lint'           # required by vscode Ansible plugin
       - 'azure-cli'
       - 'curl'
       - 'direnv'
@@ -21,6 +23,7 @@
       - 'pre-commit'
       - 'prettier'
       - 'pyenv'
+      - 'ranger'                  # vim inspired file manager for console
       - 'sops'
       - 'starship'                # shell prompt
       - 'stern'
@@ -47,18 +50,18 @@
 
     - name: Update homebrew and upgrade all packages
       community.general.homebrew:
+        update_homebrew: true
         upgrade_all: true
 
     - name: Install applications with homebrew
-      homebrew:
+      community.general.homebrew:
         name: '{{ item }}'
         state: present
-        update_homebrew: true
       loop: "{{ brew }}"
 
     - name: Install fonts with homebrew tap
       # Need to restart iTerm for 'Hack Nerd Font' to be available.
-      homebrew_tap:
+      community.general.homebrew_tap:
         name: homebrew/cask-fonts
 
     - name: Install applications with homebrew cask
@@ -67,24 +70,41 @@
         state: present
       loop: "{{ cask }}"
 
-    # Homebrew executable path is different on x86 versus Apple silicon.
-    - name: Use vim-plug to install plugins on the command line
-      ansible.builtin.shell: vim -es -u ~/.vimrc -i NONE -c "PlugInstall" -c "qa"
-      args:
-        executable: /opt/homebrew/bin/fish
-      # Even when this works, the command still exits 1.
-      # ref: https://github.com/junegunn/vim-plug/wiki/tips#install-plugins-on-the-command-line
-      ignore_errors: true
+    # # Homebrew executable path is different on x86 versus Apple silicon.
+    # - name: Use vim-plug to install plugins on the command line
+    #   ansible.builtin.shell: vim -es -u ~/.vimrc -i NONE -c "PlugInstall" -c "qa"
+    #   args:
+    #     executable: /opt/homebrew/bin/fish
+    #   # Even when this works, the command still exits 1.
+    #   # ref: https://github.com/junegunn/vim-plug/wiki/tips#install-plugins-on-the-command-line
+    #   ignore_errors: true
 
     # Different brew install directories for Intal vs. Apple Silicon Macs
     - name: Install jethrokuan/z plugin
       ansible.builtin.shell: fisher install jethrokuan/z
       args:
         executable: /opt/homebrew/bin/fish
+      register: my_output
+      changed_when: my_output.rc == "fisher list jethrokuan/z"
       when: ansible_architecture != "x86_64"
 
     - name: Install jethrokuan/z plugin
       ansible.builtin.shell: fisher install jethrokuan/z
       args:
         executable: /usr/local/bin/fish
+      register: my_output
+      changed_when: my_output.rc == "fisher list jethrokuan/z"
+      when: ansible_architecture != "x86_64"
+
+  roles:
+    - role: gantsign.visual-studio-code
+      users:
+        - username: "{{ ansible_user_id }}"
+          visual_studio_code_extensions:
+            - redhat.ansible
+            - redhat.vscode-yaml
+            - vscodevim.vim
+            - ms-python.python
+            - snyk-security.snyk-vulnerability-scanner
+
       when: ansible_architecture == "x86_64"
